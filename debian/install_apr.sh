@@ -4,6 +4,7 @@
 URLAPR='http://ftp.twaren.net/Unix/Web/apache//apr/apr-1.4.8.tar.gz'
 
 BASENAME='/usr/bin/basename'
+MAKE='/usr/bin/make'
 RM='/bin/rm'
 SED='/bin/sed'
 TAR='/bin/tar'
@@ -39,5 +40,5 @@ ${TAR} xzvf ${FILEAPR}
 cd ${DIRAPR}
 
 ./configure --prefix=/service/apr
-make
-make install
+${MAKE}
+${MAKE} install
