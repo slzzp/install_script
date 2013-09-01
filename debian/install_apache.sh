@@ -44,4 +44,4 @@ cd ${DIRAPACHE}
   --with-apr-util=/service/apr-util
 
 ${MAKE}
-# ${MAKE} install
+${MAKE} install
