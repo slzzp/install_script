@@ -116,6 +116,11 @@ if [ ! -f '/service/apr/bin/apr-1-config' ]; then
     /bin/sh install_apr.sh
 fi
 
+if [ ! -f '/service/apr/bin/apr-1-config' ]; then
+    echo "Sorry, error occurs during building apr. Please check error messages and fix them manually, then re-run install script."
+    exit
+fi
+
 # install apr-util from source
 if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
     if [ ! -f 'install_apr-util.sh' ]; then
@@ -128,6 +133,11 @@ if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
     fi
 
     /bin/sh install_apr-util.sh
+fi
+
+if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
+    echo "Sorry, error occurs during building apr-util. Please check error messages and fix them manually, then re-run install script."
+    exit
 fi
 
 # install apache from source
@@ -144,6 +154,11 @@ if [ ! -f '/service/apache2/bin/httpd' ]; then
     /bin/sh install_apache.sh
 fi
 
+if [ ! -f '/service/apache2/bin/httpd' ]; then
+    echo "Sorry, error occurs during building apache. Please check error messages and fix them manually, then re-run install script."
+    exit
+fi
+
 # install php from source
 if [ ! -f '/service/php/bin/php' ]; then
     if [ ! -f 'install_php.sh' ]; then
@@ -156,6 +171,11 @@ if [ ! -f '/service/php/bin/php' ]; then
     fi
 
     /bin/sh install_php.sh
+fi
+
+if [ ! -f '/service/php/bin/php' ]; then
+    echo "Sorry, error occurs during building php. Please check error messages and fix them manually, then re-run install script."
+    exit
 fi
 
 # ----------------------------------------------------------------------
