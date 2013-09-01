@@ -45,6 +45,16 @@ if [ ! -f '/usr/bin/libtool' ]; then
     /usr/bin/apt-get -y install libtool
 fi
 
+# developer need libxml2
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libxml2.so.2' -a ! -f '/usr/lib/libxml2.so.2' ]; then
+    /usr/bin/apt-get -y install libxml2 libxml2-dev
+fi
+
+# developer need gd2
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libgd.so.2' -a ! -f '/usr/lib/libgd.so.2' ]; then
+    /usr/bin/apt-get -y install libgd2-xpm libgd2-xpm-dev
+fi
+
 # developer need pcre
 if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
