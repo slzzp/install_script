@@ -1,0 +1,14 @@
+defencoding utf8
+encoding big5 utf8
+bind b encoding big5 utf8
+bind u encoding utf8 utf8
+
+defscrollback 10000
+# deflogin off
+vbell off
+
+screen 0
+screen 1
+screen 2
+
+select 0
