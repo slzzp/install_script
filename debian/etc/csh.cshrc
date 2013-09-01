@@ -51,7 +51,7 @@ endif
 setenv  LESS            "-srh0Pm-LESS-"
 setenv  LESSCHARDEF     "8bcccbcc18b95.."
 setenv  PAGER           "less -dEm"
-setenv  LC_CTYPE        "en_US.ISO_8859-1"
+setenv  LC_CTYPE        "en_US.UTF-8"
 setenv  LANG            C
 
 # setenv  TERM            vt100
