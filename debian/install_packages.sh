@@ -60,6 +60,11 @@ if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
 
+# full locale data
+if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; then
+    /usr/bin/apt-get -y install locales locales-all
+fi
+
 # I like to use tcsh for shell
 if [ ! -f '/usr/bin/tcsh' ]; then
     /usr/bin/apt-get -y install tcsh
