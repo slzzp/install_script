@@ -100,7 +100,7 @@ fi
 # install apr from source
 if [ ! -f '/service/apr/bin/apr-1-config' ]; then
     if [ ! -f 'install_apr.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/install_apr.sh
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr.sh
 
         if [ ! -f 'install_apr.sh' ]; then
             echo "Sorry, can't get script for installing apr now, or current/working directory is forbidden to write."
@@ -114,7 +114,7 @@ fi
 # install apr-util from source
 if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
     if [ ! -f 'install_apr-util.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/install_apr-util.sh
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr-util.sh
 
         if [ ! -f 'install_apr-util.sh' ]; then
             echo "Sorry, can't get script for installing apr-util now, or current/working directory is forbidden to write."
@@ -128,7 +128,7 @@ fi
 # install apache from source
 if [ ! -f '/service/apache2/bin/httpd' ]; then
     if [ ! -f 'install_apache.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/install_apache.sh
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apache.sh
 
         if [ ! -f 'install_apache.sh' ]; then
             echo "Sorry, can't get script for installing apache now, or current/working directory is forbidden to write."
@@ -142,7 +142,7 @@ fi
 # install php from source
 if [ ! -f '/service/php/bin/php' ]; then
     if [ ! -f 'install_php.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/install_php.sh
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_php.sh
 
         if [ ! -f 'install_php.sh' ]; then
             echo "Sorry, can't get script for installing php now, or current/working directory is forbidden to write."
