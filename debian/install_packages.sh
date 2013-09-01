@@ -40,6 +40,11 @@ if [ ! -f '/usr/bin/gcc' ]; then
     /usr/bin/apt-get -y install gcc
 fi
 
+# developer need make
+if [ ! -f '/usr/bin/make' ]; then
+    /usr/bin/apt-get -y install make
+fi
+
 # developer need libtool
 if [ ! -f '/usr/bin/libtool' ]; then
     /usr/bin/apt-get -y install libtool
