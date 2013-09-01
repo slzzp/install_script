@@ -108,7 +108,7 @@ if [ ! -f '/service/apr/bin/apr-1-config' ]; then
         fi
     fi
 
-    ./install_apr.sh
+    /bin/sh install_apr.sh
 fi
 
 # install apr-util from source
@@ -122,7 +122,7 @@ if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
         fi
     fi
 
-    ./install_apr-util.sh
+    /bin/sh install_apr-util.sh
 fi
 
 # install apache from source
@@ -136,7 +136,7 @@ if [ ! -f '/service/apache2/bin/httpd' ]; then
         fi
     fi
 
-    ./install_apache.sh
+    /bin/sh install_apache.sh
 fi
 
 # install php from source
@@ -150,7 +150,7 @@ if [ ! -f '/service/php/bin/php' ]; then
         fi
     fi
 
-    ./install_php.sh
+    /bin/sh install_php.sh
 fi
 
 # ----------------------------------------------------------------------
