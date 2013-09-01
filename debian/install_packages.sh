@@ -51,7 +51,7 @@ if [ ! -f '/usr/bin/libtool' ]; then
 fi
 
 # developer need libxml2
-if [ ! -f '/usr/lib/x86_64-linux-gnu/libxml2.so.2' -a ! -f '/usr/lib/libxml2.so.2' ]; then
+if [ ! -f '/usr/share/doc/libxml2-dev/copyright' ]; then
     /usr/bin/apt-get -y install libxml2 libxml2-dev
 fi
 
