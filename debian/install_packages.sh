@@ -65,6 +65,11 @@ if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; th
     /usr/bin/apt-get -y install locales locales-all
 fi
 
+# monitor apache activities
+if [ ! -f '/usr/sbin/apachetop' ]; then
+    /usr/bin/apt-get -y install apachetop
+fi
+
 # I like to use tcsh for shell
 if [ ! -f '/usr/bin/tcsh' ]; then
     /usr/bin/apt-get -y install tcsh
