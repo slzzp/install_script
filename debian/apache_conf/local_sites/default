@@ -1,0 +1,34 @@
+#
+# use http://hostname/
+#
+<VirtualHost *:80>
+    ServerAdmin webmaster@MYHOSTNAME
+    DocumentRoot "/service/apache2/htdocs"
+    <Directory "/service/apache2/htdocs">
+        Options Indexes
+        AllowOverride FileInfo AuthConfig Limit Indexes
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ServerName MYHOSTNAME
+    ServerAlias www.MYHOSTNAME
+    ErrorLog "logs/default/error_log"
+    CustomLog "logs/default/access_log" common
+</VirtualHost>
+
+#
+# use http://ip/
+#
+<VirtualHost *:80>
+    ServerAdmin webmaster@MYHOSTNAME
+    DocumentRoot "/service/apache2/htdocs"
+    <Directory "/service/apache2/htdocs">
+        Options Indexes
+        AllowOverride FileInfo AuthConfig Limit Indexes
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ServerName MYHOSTIP
+    ErrorLog "logs/default/error_log"
+    CustomLog "logs/default/access_log" common
+</VirtualHost>

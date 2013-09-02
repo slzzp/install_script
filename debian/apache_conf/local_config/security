@@ -1,0 +1,47 @@
+# ServerTokens
+# This directive configures what you return as the Server HTTP response
+# Header. The default is 'Full' which sends information about the OS-Type
+# and compiled in modules.
+# Set to one of:  Full | OS | Minimal | Minor | Major | Prod
+# where Full conveys the most information, and Prod the least.
+#
+#ServerTokens Minimal
+ServerTokens OS
+#ServerTokens Full
+
+# Optionally add a line containing the server version and virtual host
+# name to server-generated pages (internal error documents, FTP directory
+# listings, mod_status and mod_info output etc., but not CGI generated
+# documents or custom error documents).
+# Set to "EMail" to also include a mailto: link to the ServerAdmin.
+# Set to one of:  On | Off | EMail
+#
+#ServerSignature On
+ServerSignature Off
+
+#
+# The following lines prevent files from being viewed by Web clients.
+#
+<Files "*~">
+    Require all denied
+</Files>
+
+<Files "*.bak">
+    Require all denied
+</Files>
+
+<Files "*.backup">
+    Require all denied
+</Files>
+
+<Files ".git">
+    Require all denied
+</Files>
+
+<Files ".hg">
+    Require all denied
+</Files>
+
+<Files ".svn">
+    Require all denied
+</Files>
