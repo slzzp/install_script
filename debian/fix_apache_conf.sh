@@ -146,6 +146,8 @@ else
       | ${SED} "s/MYHOSTNAME/${MYHOSTNAME}/g" \
       | ${SED} "s/MYHOSTIP/${MYHOSTIP}/g" \
       > /service/apache2/conf/local_sites/default
+
+    ${MKDIR} -p /service/apache2/logs/default
 fi
 
 
