@@ -1,5 +1,4 @@
+
 # Include generic snippets of statements
 Include conf/local_config/
 
-# Include the virtual host configurations:
-Include conf/local_sites/
