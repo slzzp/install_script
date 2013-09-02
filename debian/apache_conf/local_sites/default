@@ -1,5 +1,5 @@
 #
-# use http://hostname/
+# use http://hostname/ or http://www.hostname/
 #
 <VirtualHost *:80>
     ServerAdmin webmaster@MYHOSTNAME
