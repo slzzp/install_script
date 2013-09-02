@@ -180,3 +180,16 @@ fi
 
 # ----------------------------------------------------------------------
 
+if [ -f '/service/apache2/conf/httpd.conf' ]; then
+    if [ ! -f 'fix_apache_conf.sh' ]; then
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/fix_apache_conf.sh
+
+        if [ ! -f 'fix_apache_conf.sh' ]; then
+            echo "Sorry, can't get script for fixing apache conf now, or current/working directory is forbidden to write."
+            exit
+        fi
+    fi
+
+    /bin/sh fix_apache_conf.sh
+fi
+
