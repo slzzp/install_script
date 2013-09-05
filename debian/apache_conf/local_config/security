@@ -34,7 +34,7 @@ ServerSignature Off
     Require all denied
 </Files>
 
-<Files ".git">
+<Files ".git*">
     Require all denied
 </Files>
 
