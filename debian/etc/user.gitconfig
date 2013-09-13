@@ -1,0 +1,15 @@
+[user]
+	name = MyNAME
+	email = MyEMAIL
+[alias]
+	co = checkout
+	ci = commit
+	di = diff
+	st = status
+	br = branch
+	re = remote
+	di = diff
+[color]
+	diff = auto
+	status = auto
+	branch = auto
