@@ -40,6 +40,7 @@ ${TAR} xzvf ${FILEAPACHE}
 cd ${DIRAPACHE}
 
 ./configure --prefix=/service/apache2 \
+  --enable-rewrite \
   --with-apr=/service/apr \
   --with-apr-util=/service/apr-util
 
