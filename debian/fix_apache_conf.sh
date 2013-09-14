@@ -194,6 +194,31 @@ else
     echo "  found: local_sites"
 fi
 
+TMPCOUNT=`${GREP} '#LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "1" ]; then
+    if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+        ${RM} -f /service/apache2/conf/httpd.conf.new
+    fi
+
+    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/\#LoadModule rewrite_module modules\/mod_rewrite\.so/LoadModule rewrite_module modules\/mod_rewrite\.so/g' > /service/apache2/conf/httpd.conf.new
+
+    ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+fi
+
+TMPCOUNT=`${GREP} '#LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "1" ]; then
+    echo "Sorry, can't enable mod_rewrite of apache."
+    exit
+fi
+
+TMPCOUNT=`${GREP} 'LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "1" ]; then
+    echo "  enabled: mod_rewrite"
+else
+    echo "Sorry, mod_rewrite is not in apache."
+    exit
+fi
+
 
 # remove temp file
 if [ -f "${TMPFILE}" ]; then
