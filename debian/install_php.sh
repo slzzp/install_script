@@ -50,6 +50,7 @@ cd ${DIRPHP}
   --with-apxs2=/service/apache2/bin/apxs \
   --with-gd \
   --with-gettext \
+  --with-mcrypt \
   --with-mhash \
   --with-mysql \
   --with-pcre-regex \

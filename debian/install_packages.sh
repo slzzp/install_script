@@ -65,6 +65,11 @@ if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
 
+# developer need libmcrypt
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -a ! -f '/usr/lib/libmcrypt.so.4' ]; then
+    /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
+fi
+
 # full locale data
 if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; then
     /usr/bin/apt-get -y install locales locales-all
