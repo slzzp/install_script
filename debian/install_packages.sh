@@ -50,6 +50,11 @@ if [ ! -f '/usr/bin/libtool' ]; then
     /usr/bin/apt-get -y install libtool
 fi
 
+# developer need gettext
+if [ ! -f '/usr/bin/gettext' ]; then
+    /usr/bin/apt-get -y install gettext
+fi
+
 # developer need libxml2
 if [ ! -f '/usr/share/doc/libxml2-dev/copyright' ]; then
     /usr/bin/apt-get -y install libxml2 libxml2-dev
