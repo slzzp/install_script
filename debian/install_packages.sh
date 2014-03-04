@@ -75,6 +75,11 @@ if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -a ! -f '/usr/lib/libmcrypt
     /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
 fi
 
+# developer need yui-compressor
+if [ ! -f '/usr/bin/yui-compressor' ]; then
+    /usr/bin/apt-get -y install yui-compressor
+fi
+
 # full locale data
 if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; then
     /usr/bin/apt-get -y install locales locales-all
