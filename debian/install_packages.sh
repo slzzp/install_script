@@ -112,7 +112,7 @@ fi
 
 # I like to use s3cmd for remote backup
 if [ ! -f '/usr/bin/s3cmd' ]; then
-    /usr/bin/apt-get -y install s3cmd
+    /usr/bin/apt-get -y install s3cmd python-magic
 fi
 
 # ----------------------------------------------------------------------
