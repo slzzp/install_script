@@ -53,6 +53,7 @@ cd ${DIRPHP}
   --with-mcrypt \
   --with-mhash \
   --with-mysql \
+  --with-mysqli \
   --with-pcre-regex \
   --with-zlib
 #  --with-openssl \
