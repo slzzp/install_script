@@ -10,11 +10,16 @@ WC="/usr/bin/wc"
 
 MAX_AUTOSSH=2
 
+#
+# NOTICES:
+#
 # 1. Follow parameter's order DO NOT CHANGE.
 # 2. Per connection per autossh setting.
 # 3. Each autossh's monitor port must even, odd port for reverse monitor port.
 #    ex: 12340 12342 12344 ... etc.
 # 4. Remember change MAX_AUTOSSH if more autossh setting.
+# 5. crontab example for root: * * * * * root /path/monitor_autossh.sh
+# 6. If you want to kill autossh, use kill -15 pid, then autossh's child ssh will be terminated, too.
 
 AUTOSSH0="-f -M 12340 -N -R 2025:127.0.0.1:25 user@host"
 AUTOSSH1="-f -M 12342 -N -R 2080:127.0.0.1:80 user@host"
