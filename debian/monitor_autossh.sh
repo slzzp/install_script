@@ -7,6 +7,9 @@ PS="/bin/ps"
 SEQ="/usr/bin/seq"
 WC="/usr/bin/wc"
 
+# set monitor time is 60 seconds
+export AUTOSSH_FIRST_POLL=60
+export AUTOSSH_POLL=60
 
 MAX_AUTOSSH=2
 
