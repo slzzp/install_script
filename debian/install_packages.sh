@@ -70,6 +70,11 @@ if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
 
+# developer need autoconf
+if [ ! -f '/usr/bin/autoconf' ]; then
+    /usr/bin/apt-get -y install autoconf
+fi
+
 # developer need libmcrypt
 if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -a ! -f '/usr/lib/libmcrypt.so.4' ]; then
     /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
