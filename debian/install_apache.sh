@@ -27,6 +27,20 @@ if [ ! -f "${FILEAPACHE}" ]; then
     fi
 fi
 
+# check apr
+if [ ! -d '/service/apr' ]; then
+    echo "Sorry, please install apr first."
+    exit
+fi
+
+# check apr-util
+if [ ! -d '/service/apr-util' ]; then
+    echo "Sorry, please install apr-util first."
+    exit
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRAPACHE}" ]; then
     ${RM} -rf ${DIRAPACHE}
@@ -35,6 +49,7 @@ fi
 # unpack source tarball
 ${TAR} xzvf ${FILEAPACHE}
 
+# ----------------------------------------------------------------------
 
 # build
 cd ${DIRAPACHE}
