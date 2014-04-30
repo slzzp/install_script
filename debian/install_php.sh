@@ -6,6 +6,7 @@
 URLPHP='http://www.php.net/distributions/php-5.5.11.tar.gz'
 
 BASENAME='/usr/bin/basename'
+CP='/bin/cp'
 MAKE='/usr/bin/make'
 RM='/bin/rm'
 SED='/bin/sed'
@@ -77,3 +78,10 @@ cd ${DIRPHP}
 
 ${MAKE}
 ${MAKE} install
+
+# ----------------------------------------------------------------------
+
+# check setting
+if [ ! -f '/service/php/lib/php.ini' ]; then
+    ${CP} etc/php.ini /service/php/lib/
+fi
