@@ -29,6 +29,14 @@ if [ ! -f "${FILEPHP}" ]; then
     fi
 fi
 
+# check apache2
+if [ ! -d '/service/apache2' -a ! -f '/service/apache2/bin/apxs' ]; then
+    echo "Sorry, please install apache2 first."
+    exit
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRPHP}" ]; then
     ${RM} -rf ${DIRPHP}
@@ -37,6 +45,7 @@ fi
 # unpack source tarball
 ${TAR} xzvf ${FILEPHP}
 
+# ----------------------------------------------------------------------
 
 # build and install
 cd ${DIRPHP}
