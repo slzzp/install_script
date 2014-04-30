@@ -69,6 +69,9 @@ EXTDIR=`${FIND} /service/php/lib/php/extensions -type d | ${SORT} | ${TAIL} -n 1
 
 ${CP} modules/memcache.so ${EXTDIR}
 
+# copy one more memcache.so for install script check
+${CP} modules/memcache.so /service/php/lib/php/extensions/
+
 # ----------------------------------------------------------------------
 
 # check setting
