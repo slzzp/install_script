@@ -27,6 +27,8 @@ if [ ! -f "${FILEAPR}" ]; then
     fi
 fi
 
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRAPR}" ]; then
     ${RM} -rf ${DIRAPR}
@@ -35,10 +37,12 @@ fi
 # unpack source tarball
 ${TAR} xzvf ${FILEAPR}
 
+# ----------------------------------------------------------------------
 
 # build and install
 cd ${DIRAPR}
 
 ./configure --prefix=/service/apr
+
 ${MAKE}
 ${MAKE} install
