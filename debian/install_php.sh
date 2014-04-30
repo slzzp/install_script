@@ -52,13 +52,20 @@ cd ${DIRPHP}
 
 ./configure --prefix=/service/php \
   --enable-ctype \
+  --enable-exif \
   --enable-fileinfo \
   --enable-fpm \
+  --enable-gd-native-ttf \
+  --enable-gd-jis-conv \
   --enable-mbstring \
+  --enable-opcache \
   --enable-sockets \
+  --enable-zip \
   --with-apxs2=/service/apache2/bin/apxs \
+  --with-bz2 \
   --with-gd \
   --with-gettext \
+  --with-iconv \
   --with-mcrypt \
   --with-mhash \
   --with-mysql \
