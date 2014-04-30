@@ -128,7 +128,8 @@ fi
 # ----------------------------------------------------------------------
 
 # install apr from source
-if [ ! -f '/service/apr/bin/apr-1-config' ]; then
+CHECKFILE='/service/apr/bin/apr-1-config'
+if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apr.sh' ]; then
         /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr.sh
 
@@ -141,13 +142,14 @@ if [ ! -f '/service/apr/bin/apr-1-config' ]; then
     /bin/sh install_apr.sh
 fi
 
-if [ ! -f '/service/apr/bin/apr-1-config' ]; then
+if [ ! -f "${CHECKFILE}" ]; then
     echo "Sorry, error occurs during building apr. Please check error messages and fix them manually, then re-run install script."
     exit
 fi
 
 # install apr-util from source
-if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
+CHECKFILE='/service/apr-util/bin/apu-1-config'
+if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apr-util.sh' ]; then
         /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr-util.sh
 
@@ -160,13 +162,14 @@ if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
     /bin/sh install_apr-util.sh
 fi
 
-if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
+if [ ! -f "${CHECKFILE}" ]; then
     echo "Sorry, error occurs during building apr-util. Please check error messages and fix them manually, then re-run install script."
     exit
 fi
 
 # install apache from source
-if [ ! -f '/service/apache2/bin/httpd' ]; then
+CHECKFILE='/service/apache2/bin/httpd'
+if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apache.sh' ]; then
         /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apache.sh
 
@@ -179,13 +182,14 @@ if [ ! -f '/service/apache2/bin/httpd' ]; then
     /bin/sh install_apache.sh
 fi
 
-if [ ! -f '/service/apache2/bin/httpd' ]; then
+if [ ! -f "${CHECKFILE}" ]; then
     echo "Sorry, error occurs during building apache. Please check error messages and fix them manually, then re-run install script."
     exit
 fi
 
 # install php from source
-if [ ! -f '/service/php/bin/php' ]; then
+CHECKFILE='/service/php/bin/php'
+if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_php.sh' ]; then
         /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_php.sh
 
@@ -198,8 +202,30 @@ if [ ! -f '/service/php/bin/php' ]; then
     /bin/sh install_php.sh
 fi
 
-if [ ! -f '/service/php/bin/php' ]; then
+if [ ! -f "${CHECKFILE}" ]; then
     echo "Sorry, error occurs during building php. Please check error messages and fix them manually, then re-run install script."
+    exit
+fi
+
+# ----------------------------------------------------------------------
+
+# install php memcache module from source
+CHECKFILE='/service/php/lib/php/extensions/memcache.so'
+if [ ! -f "${CHECKFILE}" ]; then
+    if [ ! -f 'install_php_memcache.sh' ]; then
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_php_memcache.sh
+
+        if [ ! -f 'install_php_memcache.sh' ]; then
+            echo "Sorry, can't get script for installing php memcache module now, or current/working directory is forbidden to write."
+            exit
+        fi
+    fi
+
+    /bin/sh install_php_memcache.sh
+fi
+
+if [ ! -f "${CHECKFILE}" ]; then
+    echo "Sorry, error occurs during building php memcache module. Please check error messages and fix them manually, then re-run install script."
     exit
 fi
 
