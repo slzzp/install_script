@@ -27,6 +27,14 @@ if [ ! -f "${FILEAPRUTIL}" ]; then
     fi
 fi
 
+# check apr
+if [ ! -d '/service/apr' ]; then
+    echo "Sorry, please install apr first."
+    exit
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRAPRUTIL}" ]; then
     ${RM} -rf ${DIRAPRUTIL}
@@ -35,6 +43,7 @@ fi
 # unpack source tarball
 ${TAR} xzvf ${FILEAPRUTIL}
 
+# ----------------------------------------------------------------------
 
 # build and install
 cd ${DIRAPRUTIL}
