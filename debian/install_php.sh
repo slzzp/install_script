@@ -2,8 +2,8 @@
 
 # This script generates php cli + fpm + apache2 module
 
-# ref: http://www.php.net/get/php-5.5.11.tar.gz/from/a/mirror
-URLPHP='http://www.php.net/distributions/php-5.5.11.tar.gz'
+# ref: http://www.php.net/get/php-5.5.12.tar.gz/from/a/mirror
+URLPHP='http://www.php.net/distributions/php-5.5.12.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CP='/bin/cp'
@@ -74,7 +74,7 @@ cd ${DIRPHP}
   --with-pcre-regex \
   --with-zlib
 #  --with-openssl \
-# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.5.11 --with-openssl need it
+# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.5.12 --with-openssl need it
 
 ${MAKE}
 ${MAKE} install
