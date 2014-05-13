@@ -85,3 +85,7 @@ ${MAKE} install
 if [ ! -f '/service/php/lib/php.ini' ]; then
     ${CP} etc/php.ini /service/php/lib/
 fi
+
+if [ ! -f '/service/php/etc/php-fpm.conf' ]; then
+    ${CP} etc/php-fpm.conf /service/php/etc/
+fi
