@@ -31,14 +31,14 @@ if [ ! -f "${FILEAPACHE}" ]; then
     fi
 fi
 
-# check apr
-if [ ! -d '/service/apr' ]; then
+# pre-check apr
+if [ ! -d '/service/apr' -o ! -f '/service/apr/bin/apr-1-config' ]; then
     echo "Sorry, please install apr first."
     exit
 fi
 
-# check apr-util
-if [ ! -d '/service/apr-util' ]; then
+# pre-check apr-util
+if [ ! -d '/service/apr-util' -o ! -f '/service/apr-util/bin/apu-1-config' ]; then
     echo "Sorry, please install apr-util first."
     exit
 fi
