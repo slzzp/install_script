@@ -5,6 +5,7 @@ CUT="/usr/bin/cut"
 GREP="/bin/grep"
 PS="/bin/ps"
 SEQ="/usr/bin/seq"
+TR="/usr/bin/tr"
 WC="/usr/bin/wc"
 
 # set monitor time is 60 seconds
@@ -36,10 +37,10 @@ for i in `${SEQ} 0 ${MAX_AUTOSSH}`; do
     PARAMR=`echo "${PARAM}" | ${CUT} -c 4-`
     # echo ${PARAMR}
 
-    PARAMRC=`${PS} ax | ${GREP} autossh | ${GREP} -- "${PARAMR}" | ${WC} -l`
+    PARAMRC=`${PS} ax | ${GREP} autossh | ${GREP} -- "${PARAMR}" | ${WC} -l | ${TR} -d ' '`
     # echo ${PARAMRC}
 
-    if [ 0 -eq "${PARAMRC}" ]; then
+    if [ "0" = "${PARAMRC}" ]; then
         ${AUTOSSH} ${PARAM}
     fi
 done

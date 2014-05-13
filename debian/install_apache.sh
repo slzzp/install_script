@@ -70,7 +70,7 @@ ${MAKE} install
 
 # check setting
 CHECKCOUNT=`${GREP} /service/apache2/bin/apachectl /etc/rc.local | ${WC} -l | ${TR} -d ' '`
-if [ 0 -eq "${CHECKCOUNT}" ]; then
+if [ "0" = "${CHECKCOUNT}" ]; then
     echo 'Activate apache2 in /etc/rc.local'
 
     ${TOUCH} /etc/rc.local

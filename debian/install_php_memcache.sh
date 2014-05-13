@@ -17,6 +17,7 @@ SED='/bin/sed'
 SORT='/usr/bin/sort'
 TAIL='/usr/bin/tail'
 TAR='/bin/tar'
+TR='/usr/bin/tr'
 WC='/usr/bin/wc'
 WGET='/usr/bin/wget'
 
@@ -38,7 +39,7 @@ if [ ! -f "${FILEPHPMEMCACHE}" ]; then
 fi
 
 # check php
-if [ ! -d '/service/php' -a ! -d '/service/php/lib/php/extensions' ]; then
+if [ ! -d '/service/php' -o ! -d '/service/php/lib/php/extensions' ]; then
     echo "Sorry, please install php first."
     exit
 fi
@@ -78,8 +79,8 @@ ${CP} modules/memcache.so /service/php/lib/php/extensions/
 if [ ! -f '/service/php/lib/php.ini' ]; then
     echo "extension=memcache.so\n" > /service/php/lib/php.ini
 else
-    EXTLINECOUNT=`${GREP} "extension=memcache.so" /service/php/lib/php.ini | ${WC} -l`
-    if [ 0 -eq ${EXTLINECOUNT} ]; then
+    EXTLINECOUNT=`${GREP} "extension=memcache.so" /service/php/lib/php.ini | ${WC} -l | ${TR} -d ' '`
+    if [ "0" = "${EXTLINECOUNT}" ]; then
         echo "\nextension=memcache.so\n" >> /service/php/lib/php.ini
     fi
 fi

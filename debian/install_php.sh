@@ -99,7 +99,7 @@ if [ ! -f '/service/php/etc/php-fpm.conf' ]; then
 fi
 
 CHECKCOUNT=`${GREP} /service/php/sbin/php-fpm /etc/rc.local | ${WC} -l | ${TR} -d ' '`
-if [ 0 -eq "${CHECKCOUNT}" ]; then
+if [ "0" = "${CHECKCOUNT}" ]; then
     echo 'Activate php-fpm in /etc/rc.local'
 
     ${TOUCH} /etc/rc.local
