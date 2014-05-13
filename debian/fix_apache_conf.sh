@@ -212,6 +212,9 @@ fi
 
 # ----------------------------------------------------------------------
 
+# check if module enabled
+echo "Checking httpd.conf: enabled module"
+
 TMPCOUNT=`${GREP} 'LoadModule proxy_module modules/mod_proxy.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
 if [ "${TMPCOUNT}" = "0" ]; then
     echo "Sorry, mod_proxy is not in apache."
