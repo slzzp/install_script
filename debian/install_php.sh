@@ -7,16 +7,22 @@ URLPHP='http://www.php.net/distributions/php-5.5.12.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CP='/bin/cp'
+GREP='/bin/grep'
 MAKE='/usr/bin/make'
+PWD='/bin/pwd'
 RM='/bin/rm'
 SED='/bin/sed'
 TAR='/bin/tar'
+TOUCH='/bin/touch'
+TR='/usr/bin/tr'
+WC='/usr/bin/wc'
 WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
 FILEPHP=`${BASENAME} ${URLPHP}`
 DIRPHP=`echo -n ${FILEPHP} | ${SED} 's/\.tar\.gz//g'`
+DIRPWD=`${PWD}`
 
 cd /tmp
 
@@ -82,10 +88,20 @@ ${MAKE} install
 # ----------------------------------------------------------------------
 
 # check setting
+cd ${DIRPWD}
+
 if [ ! -f '/service/php/lib/php.ini' ]; then
     ${CP} etc/php.ini /service/php/lib/
 fi
 
 if [ ! -f '/service/php/etc/php-fpm.conf' ]; then
     ${CP} etc/php-fpm.conf /service/php/etc/
+fi
+
+CHECKCOUNT=`${GREP} /service/php/sbin/php-fpm /etc/rc.local | ${WC} -l | ${TR} -d ' '`
+if [ 0 -eq "${CHECKCOUNT}" ]; then
+    echo 'Activate php-fpm in /etc/rc.local'
+
+    ${TOUCH} /etc/rc.local
+    echo '/service/php/sbin/php-fpm &' >> /etc/rc.local
 fi
