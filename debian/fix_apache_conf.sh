@@ -47,6 +47,7 @@ else
     ${MKDIR} /service/apache2/conf/local_sites
 fi
 
+# ----------------------------------------------------------------------
 
 # check config files
 echo "Checking local_config files: /service/apache2/conf/local_config/"
@@ -55,7 +56,7 @@ if [ -f '/service/apache2/conf/local_config/charset' ]; then
     echo "  found: charset (no overwrite)"
 else
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/charset
@@ -70,11 +71,13 @@ else
     ${MV} ${TMPFILE} /service/apache2/conf/local_config/charset
 fi
 
+# ----------------------------------------------------------------------
+
 if [ -f '/service/apache2/conf/local_config/php' ]; then
     echo "  found: php (no overwrite)"
 else
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/php
@@ -89,11 +92,13 @@ else
     ${MV} ${TMPFILE} /service/apache2/conf/local_config/php
 fi
 
+# ----------------------------------------------------------------------
+
 if [ -f '/service/apache2/conf/local_config/security' ]; then
     echo "  found: security (no overwrite)"
 else
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/security
@@ -108,6 +113,7 @@ else
     ${MV} ${TMPFILE} /service/apache2/conf/local_config/security
 fi
 
+# ----------------------------------------------------------------------
 
 # check site files
 echo "Checking local_sites files: /service/apache2/conf/local_sites/"
@@ -116,7 +122,7 @@ if [ -f '/service/apache2/conf/local_sites/default' ]; then
     echo "  found: default (no overwrite)"
 else
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_sites/default
@@ -150,6 +156,7 @@ else
     ${MKDIR} -p /service/apache2/logs/default
 fi
 
+# ----------------------------------------------------------------------
 
 # check httpd.conf
 echo "Checking httpd.conf: /service/apache2/conf/httpd.conf"
@@ -157,7 +164,7 @@ echo "Checking httpd.conf: /service/apache2/conf/httpd.conf"
 TMPCOUNT=`${GREP} conf/local_config /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
 if [ "${TMPCOUNT}" = "0" ]; then
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_config
@@ -174,10 +181,12 @@ else
     echo "  found: local_config"
 fi
 
+# ----------------------------------------------------------------------
+
 TMPCOUNT=`${GREP} conf/local_sites /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
 if [ "${TMPCOUNT}" = "0" ]; then
     if [ -f "${TMPFILE}" ]; then
-        ${RM} -rf ${TMPFILE}
+        ${RM} -f ${TMPFILE}
     fi
 
     ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_sites
@@ -194,33 +203,78 @@ else
     echo "  found: local_sites"
 fi
 
-TMPCOUNT=`${GREP} '#LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
-if [ "${TMPCOUNT}" = "1" ]; then
+# ----------------------------------------------------------------------
+
+# remove temp file
+if [ -f "${TMPFILE}" ]; then
+    ${RM} -f ${TMPFILE}
+fi
+
+# ----------------------------------------------------------------------
+
+TMPCOUNT=`${GREP} 'LoadModule proxy_module modules/mod_proxy.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
+    echo "Sorry, mod_proxy is not in apache."
+    exit
+fi
+
+TMPCOUNT=`${GREP} '#LoadModule proxy_module modules/mod_proxy.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
+    echo "  enabled: mod_proxy"
+else
     if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
         ${RM} -f /service/apache2/conf/httpd.conf.new
     fi
 
-    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/\#LoadModule rewrite_module modules\/mod_rewrite\.so/LoadModule rewrite_module modules\/mod_rewrite\.so/g' > /service/apache2/conf/httpd.conf.new
+    echo "  enable: mod_proxy"
+
+    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/\#LoadModule proxy_module modules\/mod_proxy\.so/LoadModule proxy_module modules\/mod_proxy\.so/g' > /service/apache2/conf/httpd.conf.new
 
     ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
 fi
 
-TMPCOUNT=`${GREP} '#LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
-if [ "${TMPCOUNT}" = "1" ]; then
-    echo "Sorry, can't enable mod_rewrite of apache."
+# ----------------------------------------------------------------------
+
+TMPCOUNT=`${GREP} 'LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
+    echo "Sorry, mod_proxy_fcgi is not in apache."
     exit
 fi
 
-TMPCOUNT=`${GREP} 'LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
-if [ "${TMPCOUNT}" = "1" ]; then
-    echo "  enabled: mod_rewrite"
+TMPCOUNT=`${GREP} '#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
+    echo "  enabled: mod_proxy_fcgi"
 else
+    if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+        ${RM} -f /service/apache2/conf/httpd.conf.new
+    fi
+
+    echo "  enable: mod_proxy_fcgi"
+
+    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/\#LoadModule proxy_fcgi_module modules\/mod_proxy_fcgi\.so/LoadModule proxy_fcgi_module modules\/mod_proxy_fcgi\.so/g' > /service/apache2/conf/httpd.conf.new
+
+    ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+fi
+
+# ----------------------------------------------------------------------
+
+TMPCOUNT=`${GREP} 'LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
     echo "Sorry, mod_rewrite is not in apache."
     exit
 fi
 
+TMPCOUNT=`${GREP} '#LoadModule rewrite_module modules/mod_rewrite.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "${TMPCOUNT}" = "0" ]; then
+    echo "  enabled: mod_rewrite"
+else
+    if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+        ${RM} -f /service/apache2/conf/httpd.conf.new
+    fi
 
-# remove temp file
-if [ -f "${TMPFILE}" ]; then
-    ${RM} -rf ${TMPFILE}
+    echo "  enable: mod_rewrite"
+
+    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/\#LoadModule rewrite_module modules\/mod_rewrite\.so/LoadModule rewrite_module modules\/mod_rewrite\.so/g' > /service/apache2/conf/httpd.conf.new
+
+    ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
 fi
