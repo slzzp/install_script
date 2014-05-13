@@ -66,7 +66,7 @@ if [ ! -f '/usr/share/doc/libbz2-dev/copyright' ]; then
 fi
 
 # developer need gd2
-if [ ! -f '/usr/lib/x86_64-linux-gnu/libgd.so.2' -a ! -f '/usr/lib/libgd.so.2' ]; then
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libgd.so.2' -o ! -f '/usr/lib/libgd.so.2' ]; then
     /usr/bin/apt-get -y install libgd2-xpm libgd2-xpm-dev
 fi
 
@@ -81,7 +81,7 @@ if [ ! -f '/usr/bin/autoconf' ]; then
 fi
 
 # developer need libmcrypt
-if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -a ! -f '/usr/lib/libmcrypt.so.4' ]; then
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -o ! -f '/usr/lib/libmcrypt.so.4' ]; then
     /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
 fi
 

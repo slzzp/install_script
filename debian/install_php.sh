@@ -37,7 +37,7 @@ if [ ! -f "${FILEPHP}" ]; then
 fi
 
 # check apache2
-if [ ! -d '/service/apache2' -a ! -f '/service/apache2/bin/apxs' ]; then
+if [ ! -d '/service/apache2' -o ! -f '/service/apache2/bin/apxs' ]; then
     echo "Sorry, please install apache2 first."
     exit
 fi
