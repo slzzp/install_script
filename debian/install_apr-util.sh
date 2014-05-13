@@ -27,8 +27,8 @@ if [ ! -f "${FILEAPRUTIL}" ]; then
     fi
 fi
 
-# check apr
-if [ ! -d '/service/apr' ]; then
+# pre-check apr
+if [ ! -d '/service/apr' -o ! -f '/service/apr/bin/apr-1-config' ]; then
     echo "Sorry, please install apr first."
     exit
 fi
