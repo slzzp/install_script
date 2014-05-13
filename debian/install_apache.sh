@@ -4,10 +4,14 @@
 URLAPACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.9.tar.gz'
 
 BASENAME='/usr/bin/basename'
+GREP='/bin/grep'
 MAKE='/usr/bin/make'
 RM='/bin/rm'
 SED='/bin/sed'
 TAR='/bin/tar'
+TOUCH='/bin/touch'
+TR='/usr/bin/tr'
+WC='/usr/bin/wc'
 WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
@@ -61,3 +65,14 @@ cd ${DIRAPACHE}
 
 ${MAKE}
 ${MAKE} install
+
+# ----------------------------------------------------------------------
+
+# check setting
+CHECKCOUNT=`${GREP} /service/apache2/bin/apachectl /etc/rc.local | ${WC} -l | ${TR} -d ' '`
+if [ 0 -eq "${CHECKCOUNT}" ]; then
+    echo 'Activate apache2 in /etc/rc.local'
+
+    ${TOUCH} /etc/rc.local
+    echo '/service/apache2/bin/apachectl start &' >> /etc/rc.local
+fi
