@@ -91,7 +91,6 @@ cd ${DIRPHP}
   --enable-opcache \
   --enable-sockets \
   --enable-zip \
-  --with-apxs2=/service/apache2/bin/apxs \
   --with-bz2 \
   --with-gd \
   --with-gettext \
@@ -102,6 +101,7 @@ cd ${DIRPHP}
   --with-mysqli \
   --with-pcre-regex \
   --with-zlib
+#  --with-apxs2=/service/apache2/bin/apxs \
 #  --with-openssl \
 # bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.5.12 --with-openssl need it
 
