@@ -44,6 +44,29 @@ fi
 
 # ----------------------------------------------------------------------
 
+# pre-install libs
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -o ! -f '/usr/lib/libmcrypt.so.4' ]; then
+    /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
+fi
+
+if [ ! -f '/usr/share/doc/libxml2-dev/copyright' ]; then
+    /usr/bin/apt-get -y install libxml2 libxml2-dev
+fi
+
+if [ ! -f '/usr/share/doc/libbz2-dev/copyright' ]; then
+    /usr/bin/apt-get -y install libbz2-dev
+fi
+
+if [ ! -f '/usr/lib/x86_64-linux-gnu/libgd.so.2' -o ! -f '/usr/lib/libgd.so.2' ]; then
+    /usr/bin/apt-get -y install libgd2-xpm libgd2-xpm-dev
+fi
+
+if [ ! -f '/usr/bin/pcre-config' ]; then
+    /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRPHP}" ]; then
     ${RM} -rf ${DIRPHP}

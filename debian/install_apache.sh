@@ -76,3 +76,10 @@ if [ "0" = "${CHECKCOUNT}" ]; then
     ${TOUCH} /etc/rc.local
     echo '/service/apache2/bin/apachectl start &' >> /etc/rc.local
 fi
+
+# ----------------------------------------------------------------------
+
+# post-install apache tools
+if [ ! -f '/usr/sbin/apachetop' ]; then
+    /usr/bin/apt-get -y install apachetop
+fi

@@ -20,86 +20,6 @@ fi
 
 # ----------------------------------------------------------------------
 
-# install need wget
-if [ ! -f '/usr/bin/wget' ]; then
-    /usr/bin/apt-get -y install wget
-fi
-
-# install need git
-if [ ! -f '/usr/bin/git' ]; then
-    /usr/bin/apt-get -y install git
-fi
-
-# tig for git
-if [ ! -f '/usr/bin/tig' ]; then
-    /usr/bin/apt-get -y install tig
-fi
-
-# developer need gcc
-if [ ! -f '/usr/bin/gcc' ]; then
-    /usr/bin/apt-get -y install gcc
-fi
-
-# developer need make
-if [ ! -f '/usr/bin/make' ]; then
-    /usr/bin/apt-get -y install make
-fi
-
-# developer need libtool
-if [ ! -f '/usr/bin/libtool' ]; then
-    /usr/bin/apt-get -y install libtool
-fi
-
-# developer need gettext
-if [ ! -f '/usr/bin/gettext' ]; then
-    /usr/bin/apt-get -y install gettext
-fi
-
-# developer need libxml2
-if [ ! -f '/usr/share/doc/libxml2-dev/copyright' ]; then
-    /usr/bin/apt-get -y install libxml2 libxml2-dev
-fi
-
-# developer need libbz2-dev
-if [ ! -f '/usr/share/doc/libbz2-dev/copyright' ]; then
-    /usr/bin/apt-get -y install libbz2-dev
-fi
-
-# developer need gd2
-if [ ! -f '/usr/lib/x86_64-linux-gnu/libgd.so.2' -o ! -f '/usr/lib/libgd.so.2' ]; then
-    /usr/bin/apt-get -y install libgd2-xpm libgd2-xpm-dev
-fi
-
-# developer need pcre
-if [ ! -f '/usr/bin/pcre-config' ]; then
-    /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
-fi
-
-# developer need autoconf
-if [ ! -f '/usr/bin/autoconf' ]; then
-    /usr/bin/apt-get -y install autoconf
-fi
-
-# developer need libmcrypt
-if [ ! -f '/usr/lib/x86_64-linux-gnu/libmcrypt.so.4' -o ! -f '/usr/lib/libmcrypt.so.4' ]; then
-    /usr/bin/apt-get -y install libmcrypt4 libmcrypt-dev
-fi
-
-# developer need yui-compressor
-if [ ! -f '/usr/bin/yui-compressor' ]; then
-    /usr/bin/apt-get -y install yui-compressor
-fi
-
-# full locale data
-if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; then
-    /usr/bin/apt-get -y install locales locales-all
-fi
-
-# monitor apache activities
-if [ ! -f '/usr/sbin/apachetop' ]; then
-    /usr/bin/apt-get -y install apachetop
-fi
-
 # I like to use tcsh for shell
 if [ ! -f '/usr/bin/tcsh' ]; then
     /usr/bin/apt-get -y install tcsh
@@ -120,9 +40,63 @@ if [ ! -f '/usr/bin/sudo' ]; then
     /usr/bin/apt-get -y install sudo
 fi
 
+# install need wget
+if [ ! -f '/usr/bin/wget' ]; then
+    /usr/bin/apt-get -y install wget
+fi
+
 # I like to use s3cmd for remote backup
 if [ ! -f '/usr/bin/s3cmd' ]; then
     /usr/bin/apt-get -y install s3cmd python-magic
+fi
+
+
+# developer need gettext
+if [ ! -f '/usr/bin/gettext' ]; then
+    /usr/bin/apt-get -y install gettext
+fi
+
+# full locale data
+if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; then
+    /usr/bin/apt-get -y install locales locales-all
+fi
+
+
+# install need git
+if [ ! -f '/usr/bin/git' ]; then
+    /usr/bin/apt-get -y install git
+fi
+
+# tig for git
+if [ ! -f '/usr/bin/tig' ]; then
+    /usr/bin/apt-get -y install tig
+fi
+
+
+# developer need autoconf
+if [ ! -f '/usr/bin/autoconf' ]; then
+    /usr/bin/apt-get -y install autoconf
+fi
+
+# developer need make
+if [ ! -f '/usr/bin/make' ]; then
+    /usr/bin/apt-get -y install make
+fi
+
+# developer need libtool
+if [ ! -f '/usr/bin/libtool' ]; then
+    /usr/bin/apt-get -y install libtool
+fi
+
+# developer need gcc
+if [ ! -f '/usr/bin/gcc' ]; then
+    /usr/bin/apt-get -y install gcc
+fi
+
+
+# developer need yui-compressor
+if [ ! -f '/usr/bin/yui-compressor' ]; then
+    /usr/bin/apt-get -y install yui-compressor
 fi
 
 # ----------------------------------------------------------------------
