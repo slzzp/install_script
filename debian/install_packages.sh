@@ -187,6 +187,26 @@ fi
 
 # ----------------------------------------------------------------------
 
+# install apache mod_wsgi from source
+CHECKFILE='/service/apache2/modules/mod_wsgi.so'
+if [ ! -f "${CHECKFILE}" ]; then
+    if [ ! -f 'install_mod_wsgi.sh' ]; then
+        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_mod_wsgi.sh
+
+        if [ ! -f 'install_mod_wsgi.sh' ]; then
+            echo "Sorry, can't get script for installing apache mod_wsgi now, or current/working directory is forbidden to write."
+            exit
+        fi
+    fi
+
+    /bin/sh install_mod_wsgi.sh
+fi
+
+if [ ! -f "${CHECKFILE}" ]; then
+    echo "Sorry, error occurs during building apache mod_wsgi. Please check error messages and fix them manually, then re-run install script."
+    exit
+fi
+
 # install php memcache module from source
 CHECKFILE='/service/php/lib/php/extensions/memcache.so'
 if [ ! -f "${CHECKFILE}" ]; then
