@@ -35,6 +35,13 @@ fi
 
 # ----------------------------------------------------------------------
 
+# pre-install libs
+if [ ! -f '/usr/share/doc/libssl-dev/copyright' ]; then
+    /usr/bin/apt-get -y install libssl-dev
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRAPRUTIL}" ]; then
     ${RM} -rf ${DIRAPRUTIL}
