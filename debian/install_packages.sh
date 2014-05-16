@@ -82,12 +82,12 @@ if [ ! -f '/usr/bin/locale' -o ! -f '/usr/share/doc/locales-all/copyright' ]; th
 fi
 
 
-# install need git
+# developer need git
 if [ ! -f '/usr/bin/git' ]; then
     /usr/bin/apt-get -y install git
 fi
 
-# tig for git
+# developer need tig
 if [ ! -f '/usr/bin/tig' ]; then
     /usr/bin/apt-get -y install tig
 fi
