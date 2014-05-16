@@ -49,6 +49,7 @@ ${TAR} xzvf ${FILEAPRUTIL}
 cd ${DIRAPRUTIL}
 
 ./configure --prefix=/service/apr-util \
+  --with-crypto \
   --with-apr=/service/apr
 
 ${MAKE}
