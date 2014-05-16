@@ -45,6 +45,13 @@ fi
 
 # ----------------------------------------------------------------------
 
+# pre-install libs
+if [ ! -f '/usr/bin/pcre-config' ]; then
+    /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRAPACHE}" ]; then
     ${RM} -rf ${DIRAPACHE}
