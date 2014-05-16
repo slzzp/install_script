@@ -54,6 +54,22 @@ if [ ! -f '/usr/bin/s3cmd' ]; then
     /usr/bin/apt-get -y install s3cmd python-magic
 fi
 
+if [ ! -f '/usr/bin/pcre-config' ]; then
+    /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
+fi
+
+if [ ! -f '/usr/bin/pkg-config' ]; then
+    /usr/bin/apt-get -y install pkg-config
+fi
+
+if [ ! -f '/usr/share/doc/libssl-dev/copyright' ]; then
+    /usr/bin/apt-get -y install libssl-dev libssl-doc
+fi
+
+if [ ! -f '/usr/share/doc/zlib1g/copyright' ]; then
+    /usr/bin/apt-get -y install zlib1g zlib1g-dev
+fi
+
 
 # developer need gettext
 if [ ! -f '/usr/bin/gettext' ]; then
