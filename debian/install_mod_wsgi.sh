@@ -71,8 +71,6 @@ cd ${DIRPHP}
   --with-apxs=/service/apache2/bin/apxs \
   --with-python=/usr/bin/python
 
-#  --with-apxs=/usr/local/apache/bin/apxs \
-
 ${MAKE}
 ${MAKE} install
 
