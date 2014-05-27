@@ -85,7 +85,9 @@ if [ "0" = "${CHECKCOUNT}" ]; then
 
     echo 'Activate mod_wsgi in /service/apache2/conf/httpd.conf'
 
-    ${CAT} /service/apache2/conf/httpd.conf | ${SED} 's/LoadModule rewrite_module modules\/mod_rewrite\.so/LoadModule rewrite_module modules\/mod_rewrite\.so\nLoadModule wsgi_module modules\/mod_wsgi\.so/g' > /service/apache2/conf/httpd.conf.new
+    ${CAT} /service/apache2/conf/httpd.conf | \
+      ${SED} 's/LoadModule alias_module modules\/mod_alias\.so/LoadModule alias_module modules\/mod_alias\.so\nLoadModule wsgi_module modules\/mod_wsgi\.so/g' > \
+      /service/apache2/conf/httpd.conf.new
 
     ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
 fi
