@@ -125,7 +125,7 @@ fi
 CHECKFILE='/service/apr/bin/apr-1-config'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apr.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_apr.sh
 
         if [ ! -f 'install_apr.sh' ]; then
             echo "Sorry, can't get script for installing apr now, or current/working directory is forbidden to write."
@@ -145,7 +145,7 @@ fi
 CHECKFILE='/service/apr-util/bin/apu-1-config'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apr-util.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apr-util.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_apr-util.sh
 
         if [ ! -f 'install_apr-util.sh' ]; then
             echo "Sorry, can't get script for installing apr-util now, or current/working directory is forbidden to write."
@@ -165,7 +165,7 @@ fi
 CHECKFILE='/service/apache2/bin/httpd'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_apache.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_apache.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_apache.sh
 
         if [ ! -f 'install_apache.sh' ]; then
             echo "Sorry, can't get script for installing apache now, or current/working directory is forbidden to write."
@@ -185,7 +185,7 @@ fi
 CHECKFILE='/service/php/bin/php'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_php.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_php.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_php.sh
 
         if [ ! -f 'install_php.sh' ]; then
             echo "Sorry, can't get script for installing php now, or current/working directory is forbidden to write."
@@ -207,7 +207,7 @@ fi
 CHECKFILE='/service/apache2/modules/mod_wsgi.so'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_mod_wsgi.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_mod_wsgi.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_mod_wsgi.sh
 
         if [ ! -f 'install_mod_wsgi.sh' ]; then
             echo "Sorry, can't get script for installing apache mod_wsgi now, or current/working directory is forbidden to write."
@@ -227,7 +227,7 @@ fi
 CHECKFILE='/service/php/lib/php/extensions/memcache.so'
 if [ ! -f "${CHECKFILE}" ]; then
     if [ ! -f 'install_php_memcache.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/install_php_memcache.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_php_memcache.sh
 
         if [ ! -f 'install_php_memcache.sh' ]; then
             echo "Sorry, can't get script for installing php memcache module now, or current/working directory is forbidden to write."
@@ -247,7 +247,7 @@ fi
 
 if [ -f '/service/apache2/conf/httpd.conf' ]; then
     if [ ! -f 'fix_apache_conf.sh' ]; then
-        /usr/bin/wget https://raw.github.com/slzzp/install_script/master/debian/fix_apache_conf.sh
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/fix_apache_conf.sh
 
         if [ ! -f 'fix_apache_conf.sh' ]; then
             echo "Sorry, can't get script for fixing apache conf now, or current/working directory is forbidden to write."
