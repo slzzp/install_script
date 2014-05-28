@@ -59,7 +59,7 @@ else
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/charset
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_config/charset
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache config file now, or current/working directory is forbidden to write."
@@ -80,7 +80,7 @@ else
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/php
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_config/php
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache config file now, or current/working directory is forbidden to write."
@@ -101,7 +101,7 @@ else
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/security
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_config/security
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache config file now, or current/working directory is forbidden to write."
@@ -125,7 +125,7 @@ else
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_sites/default
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_sites/default
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache site file now, or current/working directory is forbidden to write."
@@ -167,7 +167,7 @@ if [ "${TMPCOUNT}" = "0" ]; then
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_config
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_config
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache append file now, or current/working directory is forbidden to write."
@@ -189,7 +189,7 @@ if [ "${TMPCOUNT}" = "0" ]; then
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_sites
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/httpd.conf_append_local_sites
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache append file now, or current/working directory is forbidden to write."
