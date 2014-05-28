@@ -148,7 +148,7 @@ if [ ! -f '/service/apache2/conf/local_config/php' ]; then
         ${RM} -f ${TMPFILE}
     fi
 
-    ${WGET} -q -O ${TMPFILE} https://raw.github.com/slzzp/install_script/master/debian/apache_conf/local_config/php
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_config/php
 
     if [ ! -f "${TMPFILE}" ]; then
         echo "Sorry, can't get apache config file now, or current/working directory is forbidden to write."
