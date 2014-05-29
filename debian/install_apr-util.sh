@@ -55,7 +55,8 @@ ${TAR} xzvf ${FILEAPRUTIL}
 # build and install
 cd ${DIRAPRUTIL}
 
-./configure --prefix=/service/apr-util \
+./configure \
+  --prefix=/service/apr-util \
   --with-crypto \
   --with-apr=/service/apr
 
