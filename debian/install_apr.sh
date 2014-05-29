@@ -42,7 +42,8 @@ ${TAR} xzvf ${FILEAPR}
 # build and install
 cd ${DIRAPR}
 
-./configure --prefix=/service/apr
+./configure \
+  --prefix=/service/apr
 
 ${MAKE}
 ${MAKE} install
