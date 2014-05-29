@@ -83,7 +83,8 @@ ${TAR} xzvf ${FILEPHP}
 # build and install
 cd ${DIRPHP}
 
-./configure --prefix=/service/php \
+./configure \
+  --prefix=/service/php \
   --enable-ctype \
   --enable-exif \
   --enable-fileinfo \
@@ -132,14 +133,14 @@ if [ "0" = "${CHECKCOUNT}" ]; then
 
     ${TOUCH} /etc/rc.local
     echo '/service/php/sbin/php-fpm &' >> /etc/rc.local
+else
+    echo 'Activated php-fpm in /etc/rc.local'
 fi
 
 # ----------------------------------------------------------------------
 
 # check apache setting
 if [ ! -f '/service/apache2/conf/local_config/php' ]; then
-    echo 'Activate php settings to apache2'
-
     ${MKDIR} -p /service/apache2/conf/local_config
 
     TMPFILE="$0_tmpfile_$$"
@@ -155,7 +156,11 @@ if [ ! -f '/service/apache2/conf/local_config/php' ]; then
         exit
     fi
 
+    echo 'Activate php settings to apache2'
+
     ${MV} ${TMPFILE} /service/apache2/conf/local_config/php
+else
+    echo 'Activated php settings to apache2'
 fi
 
 # ----------------------------------------------------------------------
