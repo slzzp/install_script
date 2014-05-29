@@ -61,7 +61,8 @@ cd ${DIRPHPMEMCACHE}
 
 ${PHPIZE}
 
-./configure --enable-memcache \
+./configure \
+  --enable-memcache \
   --with-php-config=/service/php/bin/php-config
 
 ${MAKE}
