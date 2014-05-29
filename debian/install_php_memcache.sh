@@ -78,10 +78,16 @@ ${CP} modules/memcache.so /service/php/lib/php/extensions/
 
 # check setting
 if [ ! -f '/service/php/lib/php.ini' ]; then
+    echo 'Activate memcache.so to /service/php/lib/php.ini'
+
     echo "extension=memcache.so\n" > /service/php/lib/php.ini
 else
     EXTLINECOUNT=`${GREP} "extension=memcache.so" /service/php/lib/php.ini | ${WC} -l | ${TR} -d ' '`
     if [ "0" = "${EXTLINECOUNT}" ]; then
+        echo 'Activate memcache.so to /service/php/lib/php.ini'
+
         echo "\nextension=memcache.so\n" >> /service/php/lib/php.ini
+    else
+        echo 'Activated memcache.so to /service/php/lib/php.ini'
     fi
 fi
