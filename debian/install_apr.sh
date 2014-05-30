@@ -45,5 +45,21 @@ cd ${DIRAPR}
 ./configure \
   --prefix=/service/apr
 
+if [ ! -f 'Makefile' -o ! -f 'test/Makefile' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'build/apr_rules.out' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE} install
+
+if [ ! -f '/service/apr/bin/apr-1-config' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
