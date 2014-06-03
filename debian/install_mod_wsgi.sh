@@ -71,8 +71,24 @@ cd ${DIRPHP}
   --with-apxs=/service/apache2/bin/apxs \
   --with-python=/usr/bin/python
 
+if [ ! -f 'Makefile' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'mod_wsgi.lo' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE} install
+
+if [ ! -f '/service/apache2/modules/mod_wsgi.so' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
 
 # ----------------------------------------------------------------------
 
