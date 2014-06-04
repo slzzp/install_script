@@ -1,0 +1,66 @@
+
+<IfModule ssl_module>
+#
+# use https://hostname/ or https://www.hostname/
+#
+# <VirtualHost _default_:443>
+<VirtualHost *:443>
+    DocumentRoot "/service/apache2/htdocs"
+    <Directory "/service/apache2/htdocs">
+        Options Indexes
+        AllowOverride FileInfo AuthConfig Limit Indexes
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ServerName MYHOSTNAME:443
+    ServerAdmin webmaster@MYHOSTNAME
+    ErrorLog "logs/default/error_log"
+    TransferLog "logs/default/access_log"
+
+    SSLEngine on
+    SSLCertificateFile "/service/apache2/conf/server.crt"
+    SSLCertificateKeyFile "/service/apache2/conf/server.key"
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+    <Directory "/service/apache2/cgi-bin">
+        SSLOptions +StdEnvVars
+    </Directory>
+
+    BrowserMatch "MSIE [2-5]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+    CustomLog "logs/default/ssl_request_log" "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+</VirtualHost>
+
+#
+# use https://ip/
+#
+# <VirtualHost _default_:443>
+<VirtualHost *:443>
+    DocumentRoot "/service/apache2/htdocs"
+    <Directory "/service/apache2/htdocs">
+        Options Indexes
+        AllowOverride FileInfo AuthConfig Limit Indexes
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ServerName MYHOSTIP:443
+    ServerAdmin webmaster@MYHOSTNAME
+    ErrorLog "logs/default/error_log"
+    TransferLog "logs/default/access_log"
+
+    SSLEngine on
+    SSLCertificateFile "/service/apache2/conf/server_ip.crt"
+    SSLCertificateKeyFile "/service/apache2/conf/server_ip.key"
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+    <Directory "/service/apache2/cgi-bin">
+        SSLOptions +StdEnvVars
+    </Directory>
+
+    BrowserMatch "MSIE [2-5]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+    CustomLog "logs/default/ssl_request_log" "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+</VirtualHost>
+</IfModule>
