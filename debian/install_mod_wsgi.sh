@@ -93,8 +93,8 @@ fi
 # ----------------------------------------------------------------------
 
 # check setting
-CHECKCOUNT=`${GREP} 'LoadModule wsgi_module modules/mod_wsgi.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
-if [ "0" = "${CHECKCOUNT}" ]; then
+TMPCOUNT=`${GREP} 'LoadModule wsgi_module modules/mod_wsgi.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "0" = "${TMPCOUNT}" ]; then
     if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
         ${RM} -f /service/apache2/conf/httpd.conf.new
     fi
@@ -103,6 +103,23 @@ if [ "0" = "${CHECKCOUNT}" ]; then
 
     ${CAT} /service/apache2/conf/httpd.conf | \
       ${SED} 's/LoadModule alias_module modules\/mod_alias\.so/LoadModule alias_module modules\/mod_alias\.so\nLoadModule wsgi_module modules\/mod_wsgi\.so/g' > \
+      /service/apache2/conf/httpd.conf.new
+
+    ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+fi
+
+TMPCOUNT=`${GREP} '#LoadModule wsgi_module modules/mod_wsgi.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+if [ "0" = "${TMPCOUNT}" ]; then
+    echo 'Activated mod_wsgi in /service/apache2/conf/httpd.conf'
+else
+    if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+        ${RM} -f /service/apache2/conf/httpd.conf.new
+    fi
+
+    echo 'Activate mod_wsgi in /service/apache2/conf/httpd.conf'
+
+    ${CAT} /service/apache2/conf/httpd.conf | \
+      ${SED} 's/\#LoadModule wsgi_module modules\/mod_wsgi\.so/LoadModule wsgi_module modules\/mod_wsgi\.so/g' > \
       /service/apache2/conf/httpd.conf.new
 
     ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
