@@ -65,7 +65,18 @@ ${PHPIZE}
   --enable-memcache \
   --with-php-config=/service/php/bin/php-config
 
+if [ ! -f 'Makefile' -o ! -f 'config.h' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'modules/memcache.la' -o ! -f 'modules/memcache.so' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 
 EXTDIR=`${FIND} /service/php/lib/php/extensions -type d | ${SORT} | ${TAIL} -n 1`
 

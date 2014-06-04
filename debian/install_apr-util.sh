@@ -60,5 +60,21 @@ cd ${DIRAPRUTIL}
   --with-crypto \
   --with-apr=/service/apr
 
+if [ ! -f 'Makefile' -o ! -f 'test/Makefile' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'apu-config.out' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE} install
+
+if [ ! -f '/service/apr-util/bin/apu-1-config' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi

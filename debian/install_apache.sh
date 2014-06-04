@@ -81,8 +81,24 @@ cd ${DIRAPACHE}
   --with-apr=/service/apr \
   --with-apr-util=/service/apr-util
 
+if [ ! -f 'Makefile' -o ! -f 'test/Makefile' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'modules/mappers/mod_alias.la' -o ! -f 'modules/mappers/mod_alias.lo' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE} install
+
+if [ ! -f '/service/apache2/bin/httpd' -o ! -f '/service/apache2/modules/mod_alias.so' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
 
 # ----------------------------------------------------------------------
 

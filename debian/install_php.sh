@@ -109,8 +109,24 @@ cd ${DIRPHP}
 #  --with-openssl \
 # bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.5.12 --with-openssl need it
 
+if [ ! -f 'Makefile' -o ! -f 'main/php_config.h' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE}
+
+if [ ! -f 'ext/phar/phar/phar.inc' -o ! -f './sapi/cgi/php-cgi' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
+
 ${MAKE} install
+
+if [ ! -f '/service/php/bin/php' -o ! -f '/service/php/sbin/php-fpm' ]; then
+    echo 'Sorry, error occurs before.'
+    exit
+fi
 
 # ----------------------------------------------------------------------
 
