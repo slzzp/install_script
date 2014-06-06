@@ -46,6 +46,13 @@ fi
 
 # ----------------------------------------------------------------------
 
+# pre-install libs
+if [ ! -f '/usr/bin/autoconf' ]; then
+    /usr/bin/apt-get -y install autoconf
+fi
+
+# ----------------------------------------------------------------------
+
 # remove old directory
 if [ -d "${DIRPHPMEMCACHE}" ]; then
     ${RM} -rf ${DIRPHPMEMCACHE}
