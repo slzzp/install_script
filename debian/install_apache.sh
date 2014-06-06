@@ -369,6 +369,40 @@ if [ -f '/service/apache2/modules/mod_ssl.so' ]; then
         ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
     fi
 
+
+    TMPCOUNT=`${GREP} 'LoadModule socache_shmcb_module modules/mod_socache_shmcb.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+    if [ "0" = "${TMPCOUNT}" ]; then
+        if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+            ${RM} -f /service/apache2/conf/httpd.conf.new
+        fi
+
+        echo 'Activate mod_socache_shmcb in /service/apache2/conf/httpd.conf'
+
+        ${CAT} /service/apache2/conf/httpd.conf | \
+          ${SED} 's/LoadModule alias_module modules\/mod_alias\.so/LoadModule alias_module modules\/mod_alias\.so\nLoadModule socache_shmcb_module modules\/mod_socache_shmcb\.so/g' > \
+          /service/apache2/conf/httpd.conf.new
+
+        ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+    fi
+
+    TMPCOUNT=`${GREP} '#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+    if [ "0" = "${TMPCOUNT}" ]; then
+        echo 'Activated mod_socache_shmcb in /service/apache2/conf/httpd.conf'
+    else
+        if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+            ${RM} -f /service/apache2/conf/httpd.conf.new
+        fi
+
+        echo 'Activate mod_socache_shmcb in /service/apache2/conf/httpd.conf'
+
+        ${CAT} /service/apache2/conf/httpd.conf | \
+          ${SED} 's/\#LoadModule socache_shmcb_module modules\/mod_socache_shmcb\.so/LoadModule socache_shmcb_module modules\/mod_socache_shmcb\.so/g' > \
+          /service/apache2/conf/httpd.conf.new
+
+        ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+    fi
+
+
     if [ ! -f '/service/apache2/conf/server.key' -o ! -f '/service/apache2/conf/server.crt' ]; then
         echo "\n\n========== MAKE DEFAULT HOST DOMAIN NAME CERT ==========\n"
 
