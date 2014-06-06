@@ -13,6 +13,7 @@
         Allow from all
     </Directory>
     ServerName MYHOSTNAME:443
+    ServerAlias www.MYHOSTNAME:443
     ServerAdmin webmaster@MYHOSTNAME
     ErrorLog "logs/default/error_log"
     TransferLog "logs/default/access_log"
