@@ -61,7 +61,8 @@ if [ ! -f '/usr/share/doc/libbz2-dev/copyright' ]; then
 fi
 
 if [ ! -f '/usr/share/doc/libgd2-xpm-dev/copyright' ]; then
-    /usr/bin/apt-get -y install libgd2-xpm-dev libgd2-xpm
+    /usr/bin/apt-get -y install libgd2-xpm-dev
+    /usr/bin/apt-get -y install libgd2-xpm
 fi
 
 if [ ! -f '/usr/bin/pcre-config' ]; then
