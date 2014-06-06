@@ -14,6 +14,7 @@ IFCONFIG='/sbin/ifconfig'
 MAKE='/usr/bin/make'
 MKDIR='/bin/mkdir'
 MV='/bin/mv'
+OPENSSL='/usr/bin/openssl'
 RM='/bin/rm'
 SED='/bin/sed'
 TAR='/bin/tar'
@@ -54,6 +55,10 @@ fi
 # ----------------------------------------------------------------------
 
 # pre-install libs
+if [ ! -f "${OPENSSL}" ]; then
+    /usr/bin/apt-get -y install openssl
+fi
+
 if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
@@ -215,6 +220,27 @@ else
     echo 'Found security to /service/apache2/conf/local_config'
 fi
 
+if [ -f '/service/apache2/modules/mod_ssl.so' -a ! -f '/service/apache2/conf/local_config/ssl' ]; then
+    if [ -f "${TMPFILE}" ]; then
+        ${RM} -f ${TMPFILE}
+    fi
+
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_config/ssl
+
+    if [ ! -f "${TMPFILE}" ]; then
+        echo "Sorry, can't get apache config file now, or current/working directory is forbidden to write."
+        exit
+    fi
+
+    echo 'Build ssl to /service/apache2/conf/local_config'
+
+    ${MV} ${TMPFILE} /service/apache2/conf/local_config/ssl
+else
+    echo 'Found ssl to /service/apache2/conf/local_config'
+fi
+
+# ----------------------------------------------------------------------
+
 if [ ! -f '/service/apache2/conf/local_sites/default' ]; then
     if [ -f "${TMPFILE}" ]; then
         ${RM} -f ${TMPFILE}
@@ -242,7 +268,7 @@ if [ ! -f '/service/apache2/conf/local_sites/default' ]; then
         exit
     fi
 
-    echo "Build default to /service/apache2/conf/local_config using hostname '${MYHOSTNAME}' and host ip '${MYHOSTIP}'"
+    echo "Build default to /service/apache2/conf/local_sites using hostname '${MYHOSTNAME}' and host ip '${MYHOSTIP}'"
 
     ${CAT} ${TMPFILE} | \
       ${SED} "s/MYHOSTNAME/${MYHOSTNAME}/g" | \
@@ -251,7 +277,46 @@ if [ ! -f '/service/apache2/conf/local_sites/default' ]; then
 
     ${MKDIR} -p /service/apache2/logs/default
 else
-    echo 'Found default to /service/apache2/conf/local_config'
+    echo 'Found default to /service/apache2/conf/local_sites'
+fi
+
+if [ -f '/service/apache2/modules/mod_ssl.so' -a ! -f '/service/apache2/conf/local_sites/default-ssl' ]; then
+    if [ -f "${TMPFILE}" ]; then
+        ${RM} -f ${TMPFILE}
+    fi
+
+    ${WGET} -q -O ${TMPFILE} https://raw.githubusercontent.com/slzzp/install_script/master/debian/apache_conf/local_sites/default-ssl
+
+    if [ ! -f "${TMPFILE}" ]; then
+        echo "Sorry, can't get apache site file now, or current/working directory is forbidden to write."
+        exit
+    fi
+
+
+    MYHOSTNAME=`${HOSTNAME}`
+    # usually use eth0
+    MYHOSTIP=`${IFCONFIG} eth0 | ${GREP} 'inet addr' | ${AWK} '{printf("%s",$2);}' | ${AWK} -F\: '{printf("%s",$2);}' `
+
+    if [ -z "${MYHOSTNAME}" ]; then
+        echo "Sorry, can't get hostname. Please check /etc/hostname setting."
+        exit
+    fi
+
+    if [ -z "${MYHOSTIP}" ]; then
+        echo "Sorry, can't get host ip. Please check /etc/network/interfaces setting, or fix this scirpt if you are not using eth0."
+        exit
+    fi
+
+    echo "Build default-ssl to /service/apache2/conf/local_sites using hostname '${MYHOSTNAME}' and host ip '${MYHOSTIP}'"
+
+    ${CAT} ${TMPFILE} | \
+      ${SED} "s/MYHOSTNAME/${MYHOSTNAME}/g" | \
+      ${SED} "s/MYHOSTIP/${MYHOSTIP}/g" > \
+      /service/apache2/conf/local_sites/default-ssl
+
+    ${MKDIR} -p /service/apache2/logs/default
+else
+    echo 'Found default-ssl to /service/apache2/conf/local_sites'
 fi
 
 # ----------------------------------------------------------------------
@@ -266,4 +331,53 @@ fi
 # post-install apache tools
 if [ ! -f '/usr/sbin/apachetop' ]; then
     /usr/bin/apt-get -y install apachetop
+fi
+
+# ----------------------------------------------------------------------
+
+# SSL
+if [ -f '/service/apache2/modules/mod_ssl.so' ]; then
+    TMPCOUNT=`${GREP} 'LoadModule ssl_module modules/mod_ssl.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+    if [ "0" = "${TMPCOUNT}" ]; then
+        if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+            ${RM} -f /service/apache2/conf/httpd.conf.new
+        fi
+
+        echo 'Activate mod_ssl in /service/apache2/conf/httpd.conf'
+
+        ${CAT} /service/apache2/conf/httpd.conf | \
+          ${SED} 's/LoadModule alias_module modules\/mod_alias\.so/LoadModule alias_module modules\/mod_alias\.so\nLoadModule ssl_module modules\/mod_ssl\.so/g' > \
+          /service/apache2/conf/httpd.conf.new
+
+        ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+    fi
+
+    TMPCOUNT=`${GREP} '#LoadModule ssl_module modules/mod_ssl.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
+    if [ "0" = "${TMPCOUNT}" ]; then
+        echo 'Activated mod_ssl in /service/apache2/conf/httpd.conf'
+    else
+        if [ -f '/service/apache2/conf/httpd.conf.new' ]; then
+            ${RM} -f /service/apache2/conf/httpd.conf.new
+        fi
+
+        echo 'Activate mod_ssl in /service/apache2/conf/httpd.conf'
+
+        ${CAT} /service/apache2/conf/httpd.conf | \
+          ${SED} 's/\#LoadModule ssl_module modules\/mod_ssl\.so/LoadModule ssl_module modules\/mod_ssl\.so/g' > \
+          /service/apache2/conf/httpd.conf.new
+
+        ${MV} /service/apache2/conf/httpd.conf.new /service/apache2/conf/httpd.conf
+    fi
+
+    if [ ! -f '/service/apache2/conf/server.key' -o ! -f '/service/apache2/conf/server.crt' ]; then
+        echo "\n========== MAKE DEFAULT HOST DOMAIN NAME CERT ==========\n\n"
+
+        ${OPENSSL} req -new -x509 -days 999 -nodes -out /service/apache2/conf/server.crt -keyout /service/apache2/conf/server.key
+    fi
+
+    if [ ! -f '/service/apache2/conf/server_ip.key' -o ! -f '/service/apache2/conf/server_ip.crt' ]; then
+        echo "\n========= MAKE DEFAULT HOST IP CERT ==========\n\n"
+
+        ${OPENSSL} req -new -x509 -days 999 -nodes -out /service/apache2/conf/server_ip.crt -keyout /service/apache2/conf/server_ip.key
+    fi
 fi
