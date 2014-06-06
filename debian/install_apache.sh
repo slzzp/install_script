@@ -370,13 +370,13 @@ if [ -f '/service/apache2/modules/mod_ssl.so' ]; then
     fi
 
     if [ ! -f '/service/apache2/conf/server.key' -o ! -f '/service/apache2/conf/server.crt' ]; then
-        echo "\n========== MAKE DEFAULT HOST DOMAIN NAME CERT ==========\n\n"
+        echo "\n\n========== MAKE DEFAULT HOST DOMAIN NAME CERT ==========\n"
 
         ${OPENSSL} req -new -x509 -days 999 -nodes -out /service/apache2/conf/server.crt -keyout /service/apache2/conf/server.key
     fi
 
     if [ ! -f '/service/apache2/conf/server_ip.key' -o ! -f '/service/apache2/conf/server_ip.crt' ]; then
-        echo "\n========= MAKE DEFAULT HOST IP CERT ==========\n\n"
+        echo "\n\n========= MAKE DEFAULT HOST IP CERT ==========\n"
 
         ${OPENSSL} req -new -x509 -days 999 -nodes -out /service/apache2/conf/server_ip.crt -keyout /service/apache2/conf/server_ip.key
     fi
