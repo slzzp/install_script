@@ -51,6 +51,10 @@ if [ ! -f '/usr/bin/autoconf' ]; then
     /usr/bin/apt-get -y install autoconf
 fi
 
+if [ ! -f '/usr/bin/g++' ]; then
+    /usr/bin/apt-get -y install g++
+fi
+
 if [ ! -f '/usr/bin/icu-config' ]; then
     /usr/bin/apt-get -y install libicu-dev
 fi
