@@ -20,6 +20,7 @@
     ErrorLog logs/default/error_log
     TransferLog logs/default/access_log
 
+    # SSL
     SSLEngine on
     SSLCertificateFile "/service/apache2/conf/server.crt"
     SSLCertificateKeyFile "/service/apache2/conf/server.key"
@@ -54,6 +55,7 @@
     ErrorLog logs/default/error_log
     TransferLog logs/default/access_log
 
+    # SSL
     SSLEngine on
     SSLCertificateFile "/service/apache2/conf/server_ip.crt"
     SSLCertificateKeyFile "/service/apache2/conf/server_ip.key"
