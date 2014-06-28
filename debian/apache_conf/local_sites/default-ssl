@@ -5,6 +5,10 @@
 #
 # <VirtualHost _default_:443>
 <VirtualHost *:443>
+    ServerName MYHOSTNAME:443
+    ServerAlias www.MYHOSTNAME:443
+    ServerAdmin webmaster@MYHOSTNAME
+
     DocumentRoot "/service/apache2/htdocs"
     <Directory "/service/apache2/htdocs">
         Options Indexes
@@ -12,11 +16,9 @@
         Order allow,deny
         Allow from all
     </Directory>
-    ServerName MYHOSTNAME:443
-    ServerAlias www.MYHOSTNAME:443
-    ServerAdmin webmaster@MYHOSTNAME
-    ErrorLog "logs/default/error_log"
-    TransferLog "logs/default/access_log"
+
+    ErrorLog logs/default/error_log
+    TransferLog logs/default/access_log
 
     SSLEngine on
     SSLCertificateFile "/service/apache2/conf/server.crt"
@@ -30,7 +32,7 @@
     </Directory>
 
     BrowserMatch "MSIE [2-5]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
-    CustomLog "logs/default/ssl_request_log" "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+    CustomLog logs/default/ssl_request_log "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 </VirtualHost>
 
 #
@@ -38,6 +40,9 @@
 #
 # <VirtualHost _default_:443>
 <VirtualHost *:443>
+    ServerName MYHOSTIP:443
+    ServerAdmin webmaster@MYHOSTNAME
+
     DocumentRoot "/service/apache2/htdocs"
     <Directory "/service/apache2/htdocs">
         Options Indexes
@@ -45,10 +50,9 @@
         Order allow,deny
         Allow from all
     </Directory>
-    ServerName MYHOSTIP:443
-    ServerAdmin webmaster@MYHOSTNAME
-    ErrorLog "logs/default/error_log"
-    TransferLog "logs/default/access_log"
+
+    ErrorLog logs/default/error_log
+    TransferLog logs/default/access_log
 
     SSLEngine on
     SSLCertificateFile "/service/apache2/conf/server_ip.crt"
@@ -62,6 +66,6 @@
     </Directory>
 
     BrowserMatch "MSIE [2-5]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
-    CustomLog "logs/default/ssl_request_log" "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+    CustomLog logs/default/ssl_request_log "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 </VirtualHost>
 </IfModule>

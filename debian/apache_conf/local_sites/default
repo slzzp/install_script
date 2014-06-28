@@ -2,7 +2,10 @@
 # use http://hostname/ or http://www.hostname/
 #
 <VirtualHost *:80>
+    ServerName MYHOSTNAME
+    ServerAlias www.MYHOSTNAME
     ServerAdmin webmaster@MYHOSTNAME
+
     DocumentRoot "/service/apache2/htdocs"
     <Directory "/service/apache2/htdocs">
         Options Indexes
@@ -10,17 +13,18 @@
         Order allow,deny
         Allow from all
     </Directory>
-    ServerName MYHOSTNAME
-    ServerAlias www.MYHOSTNAME
-    ErrorLog "logs/default/error_log"
-    CustomLog "logs/default/access_log" common
+
+    ErrorLog logs/default/error_log
+    CustomLog logs/default/access_log common
 </VirtualHost>
 
 #
 # use http://ip/
 #
 <VirtualHost *:80>
+    ServerName MYHOSTIP
     ServerAdmin webmaster@MYHOSTNAME
+
     DocumentRoot "/service/apache2/htdocs"
     <Directory "/service/apache2/htdocs">
         Options Indexes
@@ -28,7 +32,7 @@
         Order allow,deny
         Allow from all
     </Directory>
-    ServerName MYHOSTIP
-    ErrorLog "logs/default/error_log"
-    CustomLog "logs/default/access_log" common
+
+    ErrorLog logs/default/error_log
+    CustomLog logs/default/access_log common
 </VirtualHost>
