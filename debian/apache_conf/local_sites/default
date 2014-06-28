@@ -10,8 +10,10 @@
     <Directory "/service/apache2/htdocs">
         Options Indexes
         AllowOverride FileInfo AuthConfig Limit Indexes
+
         Order allow,deny
         Allow from all
+        Require all granted
     </Directory>
 
     ErrorLog logs/default/error_log
@@ -29,8 +31,10 @@
     <Directory "/service/apache2/htdocs">
         Options Indexes
         AllowOverride FileInfo AuthConfig Limit Indexes
+
         Order allow,deny
         Allow from all
+        Require all granted
     </Directory>
 
     ErrorLog logs/default/error_log
