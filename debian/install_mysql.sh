@@ -60,7 +60,6 @@ fi
 
 
 # ----------------------------------------------------------------------
-if [ -f '/blah' ]; then
 
 # remove old directory
 if [ -d "${DIRMYSQL}" ]; then
@@ -93,8 +92,6 @@ ${MAKE}
 if [ ! -f 'sql/mysqld' -o ! -f 'mysql-test/lib/My/SafeProcess/my_safe_process' ]; then
     echo 'Sorry, error occurs before.'
     exit
-fi
-
 fi
 
 cd ${DIRMYSQL}
