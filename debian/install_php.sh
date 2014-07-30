@@ -102,7 +102,7 @@ cd ${DIRPHP}
   --with-iconv \
   --with-mcrypt \
   --with-mhash \
-  --with-mysql \
+  --with-mysql=/service/mysql \
   --with-mysqli \
   --with-pcre-regex \
   --with-zlib
