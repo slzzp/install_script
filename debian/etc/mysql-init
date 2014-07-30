@@ -118,7 +118,7 @@ case "${1:-''}" in
                 log_end_msg 0
 	        # Now start mysqlcheck or whatever the admin wants.
 	        #output=$(/etc/mysql/debian-start)
-	        output=$(/service/mysql/bin/mysqlcheck -A -s)
+	        output=$(/service/mysql/bin/mysqlcheck --defaults-file=/service/mysql/etc/admin.cnf -A -s)
 		[ -n "$output" ] && log_action_msg "$output"
 	    else
 	        log_end_msg 1
