@@ -94,8 +94,6 @@ if [ ! -f 'sql/mysqld' -o ! -f 'mysql-test/lib/My/SafeProcess/my_safe_process' ]
     exit
 fi
 
-cd ${DIRMYSQL}
-
 ${MAKE} install
 
 if [ ! -f "${INSTALL_DIR}/bin/mysql" -o ! -f "${INSTALL_DIR}/bin/mysqld" ]; then
@@ -204,48 +202,16 @@ fi
 
 ${CHMOD} 755 /etc/init.d/mysql
 
-if [ ! -f '/etc/rc0.d/K01mysql' ]; then
-    cd /etc/rc0.d
-    ${LN} -s ../init.d/mysql K01mysql 
-fi
+for RCI in 0 1 6; do
+    if [ ! -L "/etc/rc${RCI}.d/K01mysql" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/mysql "K01mysql"
+    fi
+done
 
-if [ ! -f '/etc/rc1.d/K01mysql' ]; then
-    cd /etc/rc1.d
-    ${LN} -s ../init.d/mysql K01mysql 
-fi
-
-if [ ! -f '/etc/rc2.d/S02mysql' ]; then
-    cd /etc/rc2.d
-    ${LN} -s ../init.d/mysql S02mysql 
-fi
-
-if [ ! -f '/etc/rc3.d/S02mysql' ]; then
-    cd /etc/rc3.d
-    ${LN} -s ../init.d/mysql S02mysql 
-fi
-
-if [ ! -f '/etc/rc4.d/S02mysql' ]; then
-    cd /etc/rc4.d
-    ${LN} -s ../init.d/mysql S02mysql 
-fi
-
-if [ ! -f '/etc/rc5.d/S02mysql' ]; then
-    cd /etc/rc5.d
-    ${LN} -s ../init.d/mysql S02mysql 
-fi
-
-if [ ! -f '/etc/rc6.d/K01mysql' ]; then
-    cd /etc/rc6.d
-    ${LN} -s ../init.d/mysql K01mysql 
-fi
-
-
-# ----------------------------------------------------------------------
-
-
-exit
-
-shell> bin/mysqld_safe --user=mysql &
-# Next command is optional
-shell> cp support-files/mysql.server /etc/init.d/mysql.server
-
+for RCI in 2 3 4 5; do
+    if [ ! -L "/etc/rc${RCI}.d/S02mysql" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/mysql "S02mysql"
+    fi
+done
