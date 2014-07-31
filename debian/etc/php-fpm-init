@@ -1,0 +1,61 @@
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:            php-fpm
+# Required-Start:      $remote_fs $syslog
+# Required-Stop:       $remote_fs $syslog
+# Should-Start:                $local_fs
+# Should-Stop:         $local_fs
+# Default-Start:       2 3 4 5
+# Default-Stop:                0 1 6
+# Short-Description:   Start php-fpm daemon
+# Description:         Start up php-fpm, a fast-cgi php pool daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/service/php/sbin/php-fpm
+DAEMONNAME=php-fpm
+PIDFILE=/service/php/var/run/php-fpm.pid
+
+test -x $DAEMON || exit 0
+test -x $DAEMONBOOTSTRAP || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+
+case "$1" in
+    start)
+	echo -n "Starting $DAEMONNAME: "
+	start-stop-daemon --start --quiet --exec $DAEMON
+	echo "$DAEMONNAME."
+	;;
+
+    stop)
+	echo -n "Stopping $DAEMONNAME: "
+	start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE --exec $DAEMON
+	rm -f $PIDFILE
+	echo "$DAEMONNAME."
+	;;
+
+    restart|reload|force-reload)
+	echo -n "Restarting $DAEMONNAME: "
+	start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE
+	rm -f $PIDFILE
+
+	start-stop-daemon --start --quiet --exec $DAEMON
+	echo "$DAEMONNAME."
+	;;
+
+    status)
+	status_of_proc -p $PIDFILE $DAEMON $NAME  && exit 0 || exit $?
+	;;
+
+    *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

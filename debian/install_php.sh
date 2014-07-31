@@ -7,8 +7,10 @@ URLPHP='http://www.php.net/distributions/php-5.5.14.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
+CHMOD='/bin/chmod'
 CP='/bin/cp'
 GREP='/bin/grep'
+LN='/bin/ln'
 MAKE='/usr/bin/make'
 MKDIR='/bin/mkdir'
 MV='/bin/mv'
@@ -144,15 +146,29 @@ fi
 
 # ----------------------------------------------------------------------
 
-CHECKCOUNT=`${GREP} /service/php/sbin/php-fpm /etc/rc.local | ${WC} -l | ${TR} -d ' '`
-if [ "0" = "${CHECKCOUNT}" ]; then
-    echo 'Activate php-fpm in /etc/rc.local'
+# set startup script
+cd ${DIRPWD}
 
-    ${TOUCH} /etc/rc.local
-    echo '/service/php/sbin/php-fpm &' >> /etc/rc.local
-else
-    echo 'Activated php-fpm in /etc/rc.local'
+if [ ! -f '/etc/init.d/php-fpm' ]; then
+    ${CP} etc/php-fpm-init /etc/init.d/php-fpm
 fi
+
+${CHMOD} +x /etc/init.d/php-fpm
+
+for RCI in 0 1 6; do
+    if [ ! -L "/etc/rc${RCI}.d/K01php-fpm" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/php-fpm "K01php-fpm"
+    fi
+done
+
+for RCI in 2 3 4 5; do
+    if [ ! -L "/etc/rc${RCI}.d/S02php-fpm" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/php-fpm "S02php-fpm"
+    fi
+done
+
 
 # ----------------------------------------------------------------------
 
