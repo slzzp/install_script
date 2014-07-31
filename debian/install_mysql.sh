@@ -197,10 +197,9 @@ cd ${DIRPWD}
 
 if [ ! -f '/etc/init.d/mysql' ]; then
     ${CP} etc/mysql-init /etc/init.d/mysql
-    ${CHMOD} +x /etc/init.d/mysql
 fi
 
-${CHMOD} 755 /etc/init.d/mysql
+${CHMOD} +x /etc/init.d/mysql
 
 for RCI in 0 1 6; do
     if [ ! -L "/etc/rc${RCI}.d/K01mysql" ]; then
