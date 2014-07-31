@@ -105,13 +105,11 @@ max_binlog_size         = 100M
 # ssl-ca=/etc/mysql/cacert.pem
 # ssl-cert=/etc/mysql/server-cert.pem
 # ssl-key=/etc/mysql/server-key.pem
-
 character-set-server = utf8mb4
 collation-server = utf8mb4_general_ci
 init-connect = 'SET NAMES utf8mb4'
-
 innodb_file_per_table=1
-
+# innodb_force_recovery = 1
 
 [mysqldump]
 quick
