@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/bin/bash
+#
 ### BEGIN INIT INFO
 # Provides:            php-fpm
 # Required-Start:      $remote_fs $syslog
@@ -17,7 +18,6 @@ DAEMONNAME=php-fpm
 PIDFILE=/service/php/var/run/php-fpm.pid
 
 test -x $DAEMON || exit 0
-test -x $DAEMONBOOTSTRAP || exit 0
 
 set -e
 
