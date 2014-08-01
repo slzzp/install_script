@@ -15,6 +15,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/service/php/sbin/php-fpm
 DAEMONNAME=php-fpm
+NAME=php-fpm
 PIDFILE=/service/php/var/run/php-fpm.pid
 
 test -x $DAEMON || exit 0
@@ -26,20 +27,20 @@ set -e
 
 case "$1" in
     start)
-	echo -n "Starting $DAEMONNAME: "
+	echo -n "Starting $NAME: "
 	start-stop-daemon --start --quiet --exec $DAEMON
 	echo "$DAEMONNAME."
 	;;
 
     stop)
-	echo -n "Stopping $DAEMONNAME: "
+	echo -n "Stopping $NAME: "
 	start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE --exec $DAEMON
 	rm -f $PIDFILE
 	echo "$DAEMONNAME."
 	;;
 
     restart|reload|force-reload)
-	echo -n "Restarting $DAEMONNAME: "
+	echo -n "Restarting $NAME: "
 	start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE
 	rm -f $PIDFILE
 
