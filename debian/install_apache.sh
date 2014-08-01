@@ -6,14 +6,18 @@ URLAPACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.9.tar.gz'
 AWK='/usr/bin/awk'
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
+CHMOD='/bin/chmod'
+CP='/bin/cp'
 CUT='/usr/bin/cut'
 GREP='/bin/grep'
 HEAD='/usr/bin/head'
 HOSTNAME='/bin/hostname'
 IFCONFIG='/sbin/ifconfig'
+LN='/bin/ln'
 MAKE='/usr/bin/make'
 MKDIR='/bin/mkdir'
 MV='/bin/mv'
+PWD='/bin/pwd'
 OPENSSL='/usr/bin/openssl'
 RM='/bin/rm'
 SED='/bin/sed'
@@ -27,6 +31,7 @@ WGET='/usr/bin/wget'
 
 FILEAPACHE=`${BASENAME} ${URLAPACHE}`
 DIRAPACHE=`echo -n ${FILEAPACHE} | ${SED} 's/\.tar\.gz//g'`
+DIRPWD=`${PWD}`
 
 cd /tmp
 
@@ -64,6 +69,8 @@ if [ ! -f '/usr/bin/pcre-config' ]; then
 fi
 
 # ----------------------------------------------------------------------
+
+if [ -f '/blah' ]; then
 
 # remove old directory
 if [ -d "${DIRAPACHE}" ]; then
@@ -105,18 +112,32 @@ if [ ! -f '/service/apache2/bin/httpd' -o ! -f '/service/apache2/modules/mod_ali
     exit
 fi
 
+fi
+
 # ----------------------------------------------------------------------
 
-# check setting
-CHECKCOUNT=`${GREP} /service/apache2/bin/apachectl /etc/rc.local | ${WC} -l | ${TR} -d ' '`
-if [ "0" = "${CHECKCOUNT}" ]; then
-    echo 'Activate apache2 in /etc/rc.local'
+# set startup script
+cd ${DIRPWD}
 
-    ${TOUCH} /etc/rc.local
-    echo '/service/apache2/bin/apachectl start &' >> /etc/rc.local
-else
-    echo 'Activated apache2 in /etc/rc.local'
+if [ ! -f '/etc/init.d/apache2' ]; then
+    ${CP} etc/apache2-init /etc/init.d/apache2
 fi
+
+${CHMOD} +x /etc/init.d/apache2
+
+for RCI in 0 1 6; do
+    if [ ! -L "/etc/rc${RCI}.d/K01apache2" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/apache2 "K01apache2"
+    fi
+done
+
+for RCI in 2 3 4 5; do
+    if [ ! -L "/etc/rc${RCI}.d/S02apache2" ]; then
+        cd "/etc/rc${RCI}.d"
+        ${LN} -s ../init.d/apache2 "S02apache2"
+    fi
+done
 
 # ----------------------------------------------------------------------
 

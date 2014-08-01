@@ -1,0 +1,57 @@
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:            apache2
+# Required-Start:      $remote_fs $syslog
+# Required-Stop:       $remote_fs $syslog
+# Should-Start:                $local_fs
+# Should-Stop:         $local_fs
+# Default-Start:       2 3 4 5
+# Default-Stop:                0 1 6
+# Short-Description:   Start apache2 daemon
+# Description:         Start up apache2 daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/service/apache2/bin/apachectl
+DAEMONNAME=httpd
+NAME=apache2
+PIDFILE=/service/apache2/logs/httpd.pid
+
+test -x $DAEMON || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+
+case "$1" in
+    start)
+	echo -n "Starting $NAME: "
+	$DAEMON start
+	echo "$DAEMONNAME."
+	;;
+
+    stop)
+	echo -n "Stopping $NAME: "
+	$DAEMON stop
+	echo "$DAEMONNAME."
+	;;
+
+    restart|reload|force-reload)
+	echo -n "Restarting $NAME: "
+	$DAEMON restart
+	echo "$DAEMONNAME."
+	;;
+
+    status)
+	status_of_proc -p $PIDFILE $DAEMON $NAME  && exit 0 || exit $?
+	;;
+
+    *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
