@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://dev.mysql.com/downloads/mysql/
-URLMYSQL='http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.19.tar.gz'
+URLMYSQL='http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.20.tar.gz'
 
 INSTALL_DIR='/service/mysql'
 MYSQL_DATA_DIR='/var/lib/mysql'
