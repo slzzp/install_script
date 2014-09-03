@@ -67,6 +67,10 @@ if [ ! -f '/usr/share/doc/libgd2-xpm-dev/copyright' ]; then
     /usr/bin/apt-get -y install libgd2-xpm
 fi
 
+if [ ! -f '/usr/bin/freetype-config' ]; then
+    /usr/bin/apt-get -y install libfreetype6-dev
+fi
+
 if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
@@ -99,6 +103,7 @@ cd ${DIRPHP}
   --enable-sockets \
   --enable-zip \
   --with-bz2 \
+  --with-freetype-dir \
   --with-gd \
   --with-gettext \
   --with-iconv \
