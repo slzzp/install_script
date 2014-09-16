@@ -101,7 +101,6 @@ cd ${DIRPHP}
   --enable-fileinfo \
   --enable-fpm \
   --enable-gd-native-ttf \
-  --enable-gd-jis-conv \
   --enable-mbstring \
   --enable-opcache \
   --enable-sockets \
