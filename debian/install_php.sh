@@ -67,6 +67,10 @@ if [ ! -f '/usr/share/doc/libgd2-xpm-dev/copyright' ]; then
     /usr/bin/apt-get -y install libgd2-xpm
 fi
 
+if [ ! -f '/usr/bin/re2c' ]; then
+    /usr/bin/apt-get -y install re2c
+fi
+
 if [ ! -f '/usr/bin/freetype-config' ]; then
     /usr/bin/apt-get -y install libfreetype6-dev
 fi
