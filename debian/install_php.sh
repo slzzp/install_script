@@ -111,6 +111,7 @@ cd ${DIRPHP}
   --with-gd \
   --with-gettext \
   --with-iconv \
+  --with-jpeg-dir \
   --with-mcrypt \
   --with-mhash \
   --with-mysql=/service/mysql \
