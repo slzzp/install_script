@@ -70,8 +70,6 @@ fi
 
 # ----------------------------------------------------------------------
 
-if [ -f '/blah' ]; then
-
 # remove old directory
 if [ -d "${DIRAPACHE}" ]; then
     ${RM} -rf ${DIRAPACHE}
@@ -110,8 +108,6 @@ ${MAKE} install
 if [ ! -f '/service/apache2/bin/httpd' -o ! -f '/service/apache2/modules/mod_alias.so' ]; then
     echo 'Sorry, error occurs before.'
     exit
-fi
-
 fi
 
 # ----------------------------------------------------------------------
