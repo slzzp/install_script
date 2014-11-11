@@ -3,7 +3,9 @@
 # This script generates mod_wsgi of apache2
 
 # ref: https://code.google.com/p/modwsgi/wiki/DownloadTheSoftware?tm=2
-URLPHP='https://modwsgi.googlecode.com/files/mod_wsgi-3.4.tar.gz'
+#      https://github.com/GrahamDumpleton/mod_wsgi/releases
+# URLPHP='https://modwsgi.googlecode.com/files/mod_wsgi-3.4.tar.gz'
+URLPHP='https://github.com/GrahamDumpleton/mod_wsgi/archive/4.3.2.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
