@@ -2,8 +2,8 @@
 
 # This script generates php cli + fpm + apache2 module
 
-# ref: http://www.php.net/get/php-5.5.17.tar.gz/from/a/mirror
-URLPHP='http://www.php.net/distributions/php-5.5.17.tar.gz'
+# ref: http://www.php.net/get/php-5.6.2.tar.gz/from/a/mirror
+URLPHP='http://www.php.net/distributions/php-5.6.2.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
@@ -119,7 +119,7 @@ cd ${DIRPHP}
   --with-zlib
 #  --with-apxs2=/service/apache2/bin/apxs \
 #  --with-openssl \
-# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.5.17 --with-openssl need it
+# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.6.2 --with-openssl need it
 
 if [ ! -f 'Makefile' -o ! -f 'main/php_config.h' ]; then
     echo 'Sorry, error occurs before.'
