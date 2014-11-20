@@ -4,8 +4,8 @@
 
 # ref: https://code.google.com/p/modwsgi/wiki/DownloadTheSoftware?tm=2
 #      https://github.com/GrahamDumpleton/mod_wsgi/releases
-# URLPHP='https://modwsgi.googlecode.com/files/mod_wsgi-3.4.tar.gz'
-URLPHP='https://github.com/GrahamDumpleton/mod_wsgi/archive/4.3.2.tar.gz'
+# URL_MOD_WSGI='https://modwsgi.googlecode.com/files/mod_wsgi-3.4.tar.gz'
+URL_MOD_WSGI='https://github.com/GrahamDumpleton/mod_wsgi/archive/4.3.2.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
@@ -24,19 +24,19 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-#FILEPHP=`${BASENAME} ${URLPHP}`
-FILEPHP='mod_wsgi-4.3.2.tar.gz'
-DIRPHP=`echo -n ${FILEPHP} | ${SED} 's/\.tar\.gz//g'`
-DIRPWD=`${PWD}`
+#FILE_MOD_WSGI=`${BASENAME} ${URL_MOD_WSGI}`
+FILE_MOD_WSGI='mod_wsgi-4.3.2.tar.gz'
+DIR_MOD_WSGI=`echo -n ${FILE_MOD_WSGI} | ${SED} 's/\.tar\.gz//g'`
+DIR_PWD=`${PWD}`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEPHP}" ]; then
-    ${WGET} -4 -O ${FILEPHP} ${URLPHP}
+if [ ! -f "${FILE_MOD_WSGI}" ]; then
+    ${WGET} -4 -O ${FILE_MOD_WSGI} ${URL_MOD_WSGI}
 
-    if [ ! -f "${FILEPHP}" ]; then
-        echo "Sorry, can't get ${FILEPHP} for install php now."
+    if [ ! -f "${FILE_MOD_WSGI}" ]; then
+        echo "Sorry, can't get ${FILE_MOD_WSGI} for install php now."
         exit
     fi
 fi
@@ -58,17 +58,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRPHP}" ]; then
-    ${RM} -rf ${DIRPHP}
+if [ -d "${DIR_MOD_WSGI}" ]; then
+    ${RM} -rf ${DIR_MOD_WSGI}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEPHP}
+${TAR} xzvf ${FILE_MOD_WSGI}
 
 # ----------------------------------------------------------------------
 
 # build and install
-cd ${DIRPHP}
+cd ${DIR_MOD_WSGI}
 
 ./configure \
   --with-apxs=/service/apache2/bin/apxs \
