@@ -24,7 +24,8 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEPHP=`${BASENAME} ${URLPHP}`
+#FILEPHP=`${BASENAME} ${URLPHP}`
+FILEPHP='mod_wsgi-4.3.2.tar.gz'
 DIRPHP=`echo -n ${FILEPHP} | ${SED} 's/\.tar\.gz//g'`
 DIRPWD=`${PWD}`
 
@@ -32,7 +33,7 @@ cd /tmp
 
 # get source tarball
 if [ ! -f "${FILEPHP}" ]; then
-    ${WGET} -4 ${URLPHP}
+    ${WGET} -4 -O ${FILEPHP} ${URLPHP}
 
     if [ ! -f "${FILEPHP}" ]; then
         echo "Sorry, can't get ${FILEPHP} for install php now."
@@ -80,7 +81,7 @@ fi
 
 ${MAKE}
 
-if [ ! -f 'mod_wsgi.lo' ]; then
+if [ ! -f 'src/server/mod_wsgi.la' ]; then
     echo 'Sorry, error occurs before.'
     exit
 fi
