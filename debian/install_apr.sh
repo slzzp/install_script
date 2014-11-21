@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://apr.apache.org/download.cgi?Preferred=http%3A%2F%2Fftp.twaren.net%2FUnix%2FWeb%2Fapache%2F
-URLAPR='http://ftp.twaren.net/Unix/Web/apache//apr/apr-1.5.1.tar.gz'
+URL_APR='http://ftp.twaren.net/Unix/Web/apache//apr/apr-1.5.1.tar.gz'
 
 BASENAME='/usr/bin/basename'
 MAKE='/usr/bin/make'
@@ -12,17 +12,17 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEAPR=`${BASENAME} ${URLAPR}`
-DIRAPR=`echo -n ${FILEAPR} | ${SED} 's/\.tar\.gz//g'`
+FILE_APR=`${BASENAME} ${URL_APR}`
+DIR_APR=`echo -n ${FILE_APR} | ${SED} 's/\.tar\.gz//g'`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEAPR}" ]; then
-    ${WGET} -4 ${URLAPR}
+if [ ! -f "${FILE_APR}" ]; then
+    ${WGET} -4 ${URL_APR}
 
-    if [ ! -f "${FILEAPR}" ]; then
-        echo "Sorry, can't get ${FILEAPR} for install apr now."
+    if [ ! -f "${FILE_APR}" ]; then
+        echo "Sorry, can't get ${FILE_APR} for install apr now."
         exit
     fi
 fi
@@ -30,17 +30,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRAPR}" ]; then
-    ${RM} -rf ${DIRAPR}
+if [ -d "${DIR_APR}" ]; then
+    ${RM} -rf ${DIR_APR}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEAPR}
+${TAR} xzvf ${FILE_APR}
 
 # ----------------------------------------------------------------------
 
 # build and install
-cd ${DIRAPR}
+cd ${DIR_APR}
 
 ./configure \
   --prefix=/service/apr
