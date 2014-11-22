@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://httpd.apache.org/download.cgi?Preferred=http%3A%2F%2Fftp.twaren.net%2FUnix%2FWeb%2Fapache%2F
-URLAPACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.10.tar.gz'
+URL_APACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.10.tar.gz'
 
 AWK='/usr/bin/awk'
 BASENAME='/usr/bin/basename'
@@ -29,18 +29,18 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEAPACHE=`${BASENAME} ${URLAPACHE}`
-DIRAPACHE=`echo -n ${FILEAPACHE} | ${SED} 's/\.tar\.gz//g'`
-DIRPWD=`${PWD}`
+FILE_APACHE=`${BASENAME} ${URL_APACHE}`
+DIR_APACHE=`echo -n ${FILE_APACHE} | ${SED} 's/\.tar\.gz//g'`
+DIR_PWD=`${PWD}`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEAPACHE}" ]; then
-    ${WGET} -4 ${URLAPACHE}
+if [ ! -f "${FILE_APACHE}" ]; then
+    ${WGET} -4 ${URL_APACHE}
 
-    if [ ! -f "${FILEAPACHE}" ]; then
-        echo "Sorry, can't get ${FILEAPACHE} for install apache now."
+    if [ ! -f "${FILE_APACHE}" ]; then
+        echo "Sorry, can't get ${FILE_APACHE} for install apache now."
         exit
     fi
 fi
@@ -71,17 +71,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRAPACHE}" ]; then
-    ${RM} -rf ${DIRAPACHE}
+if [ -d "${DIR_APACHE}" ]; then
+    ${RM} -rf ${DIR_APACHE}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEAPACHE}
+${TAR} xzvf ${FILE_APACHE}
 
 # ----------------------------------------------------------------------
 
 # build
-cd ${DIRAPACHE}
+cd ${DIR_APACHE}
 
 ./configure \
   --prefix=/service/apache2 \
@@ -113,7 +113,7 @@ fi
 # ----------------------------------------------------------------------
 
 # set startup script
-cd ${DIRPWD}
+cd ${DIR_PWD}
 
 if [ ! -f '/etc/init.d/apache2' ]; then
     ${CP} etc/apache2-init /etc/init.d/apache2
