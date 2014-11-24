@@ -2,8 +2,8 @@
 
 # This script generates php cli + fpm + apache2 module
 
-# ref: http://www.php.net/get/php-5.6.2.tar.gz/from/a/mirror
-URLPHP='http://www.php.net/distributions/php-5.6.2.tar.gz'
+# ref: http://www.php.net/get/php-5.6.3.tar.gz/from/a/mirror
+URL_PHP='http://www.php.net/distributions/php-5.6.3.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
@@ -25,18 +25,18 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEPHP=`${BASENAME} ${URLPHP}`
-DIRPHP=`echo -n ${FILEPHP} | ${SED} 's/\.tar\.gz//g'`
-DIRPWD=`${PWD}`
+FILE_PHP=`${BASENAME} ${URL_PHP}`
+DIR_PHP=`echo -n ${FILE_PHP} | ${SED} 's/\.tar\.gz//g'`
+DIR_PWD=`${PWD}`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEPHP}" ]; then
-    ${WGET} -4 ${URLPHP}
+if [ ! -f "${FILE_PHP}" ]; then
+    ${WGET} -4 ${URL_PHP}
 
-    if [ ! -f "${FILEPHP}" ]; then
-        echo "Sorry, can't get ${FILEPHP} for install php now."
+    if [ ! -f "${FILE_PHP}" ]; then
+        echo "Sorry, can't get ${FILE_PHP} for install php now."
         exit
     fi
 fi
@@ -82,17 +82,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRPHP}" ]; then
-    ${RM} -rf ${DIRPHP}
+if [ -d "${DIR_PHP}" ]; then
+    ${RM} -rf ${DIR_PHP}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEPHP}
+${TAR} xzvf ${FILE_PHP}
 
 # ----------------------------------------------------------------------
 
 # build and install
-cd ${DIRPHP}
+cd ${DIR_PHP}
 
 ./configure \
   --prefix=/service/php \
@@ -119,7 +119,7 @@ cd ${DIRPHP}
   --with-zlib
 #  --with-apxs2=/service/apache2/bin/apxs \
 #  --with-openssl \
-# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.6.2 --with-openssl need it
+# bug ? OpenSSL 1.0.1e has no openssl/evp.h but php-5.6.3 --with-openssl need it
 
 if [ ! -f 'Makefile' -o ! -f 'main/php_config.h' ]; then
     echo 'Sorry, error occurs before.'
@@ -143,7 +143,7 @@ fi
 # ----------------------------------------------------------------------
 
 # check setting
-cd ${DIRPWD}
+cd ${DIR_PWD}
 
 if [ ! -f '/service/php/lib/php.ini' ]; then
     ${CP} etc/php.ini /service/php/lib/
@@ -156,7 +156,7 @@ fi
 # ----------------------------------------------------------------------
 
 # set startup script
-cd ${DIRPWD}
+cd ${DIR_PWD}
 
 if [ ! -f '/etc/init.d/php-fpm' ]; then
     ${CP} etc/php-fpm-init /etc/init.d/php-fpm
