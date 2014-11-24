@@ -4,7 +4,7 @@
 
 # ref: http://www.php.net/manual/en/memcache.installation.php
 #      http://pecl.php.net/package/memcache
-URLPHPMEMCACHE='http://pecl.php.net/get/memcache-2.2.7.tgz'
+URL_PHP_MEMCACHE='http://pecl.php.net/get/memcache-2.2.7.tgz'
 
 BASENAME='/usr/bin/basename'
 CP='/bin/cp'
@@ -23,17 +23,17 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEPHPMEMCACHE=`${BASENAME} ${URLPHPMEMCACHE}`
-DIRPHPMEMCACHE=`echo -n ${FILEPHPMEMCACHE} | ${SED} 's/\.tgz//g'`
+FILE_PHP_MEMCACHE=`${BASENAME} ${URL_PHP_MEMCACHE}`
+DIR_PHP_MEMCACHE=`echo -n ${FILE_PHP_MEMCACHE} | ${SED} 's/\.tgz//g'`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEPHPMEMCACHE}" ]; then
-    ${WGET} -4 ${URLPHPMEMCACHE}
+if [ ! -f "${FILE_PHP_MEMCACHE}" ]; then
+    ${WGET} -4 ${URL_PHP_MEMCACHE}
 
-    if [ ! -f "${FILEPHPMEMCACHE}" ]; then
-        echo "Sorry, can't get ${FILEPHPMEMCACHE} for install php memcache module now."
+    if [ ! -f "${FILE_PHP_MEMCACHE}" ]; then
+        echo "Sorry, can't get ${FILE_PHP_MEMCACHE} for install php memcache module now."
         exit
     fi
 fi
@@ -54,17 +54,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRPHPMEMCACHE}" ]; then
-    ${RM} -rf ${DIRPHPMEMCACHE}
+if [ -d "${DIR_PHP_MEMCACHE}" ]; then
+    ${RM} -rf ${DIR_PHP_MEMCACHE}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEPHPMEMCACHE}
+${TAR} xzvf ${FILE_PHP_MEMCACHE}
 
 # ----------------------------------------------------------------------
 
 # build and install
-cd ${DIRPHPMEMCACHE}
+cd ${DIR_PHP_MEMCACHE}
 
 ${PHPIZE}
 
