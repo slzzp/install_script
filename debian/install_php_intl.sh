@@ -4,7 +4,7 @@
 
 # ref: http://www.php.net/manual/en/intl.installation.php
 #      http://pecl.php.net/package/intl
-URLPHPINTL='http://pecl.php.net/get/intl-3.0.0.tgz'
+URL_PHP_INTL='http://pecl.php.net/get/intl-3.0.0.tgz'
 
 BASENAME='/usr/bin/basename'
 CP='/bin/cp'
@@ -23,17 +23,17 @@ WGET='/usr/bin/wget'
 
 # ----------------------------------------------------------------------
 
-FILEPHPINTL=`${BASENAME} ${URLPHPINTL}`
-DIRPHPINTL=`echo -n ${FILEPHPINTL} | ${SED} 's/\.tgz//g'`
+FILE_PHP_INTL=`${BASENAME} ${URL_PHP_INTL}`
+DIR_PHP_INTL=`echo -n ${FILE_PHP_INTL} | ${SED} 's/\.tgz//g'`
 
 cd /tmp
 
 # get source tarball
-if [ ! -f "${FILEPHPINTL}" ]; then
-    ${WGET} -4 ${URLPHPINTL}
+if [ ! -f "${FILE_PHP_INTL}" ]; then
+    ${WGET} -4 ${URL_PHP_INTL}
 
-    if [ ! -f "${FILEPHPINTL}" ]; then
-        echo "Sorry, can't get ${FILEPHPINTL} for install php intl module now."
+    if [ ! -f "${FILE_PHP_INTL}" ]; then
+        echo "Sorry, can't get ${FILE_PHP_INTL} for install php intl module now."
         exit
     fi
 fi
@@ -62,17 +62,17 @@ fi
 # ----------------------------------------------------------------------
 
 # remove old directory
-if [ -d "${DIRPHPINTL}" ]; then
-    ${RM} -rf ${DIRPHPINTL}
+if [ -d "${DIR_PHP_INTL}" ]; then
+    ${RM} -rf ${DIR_PHP_INTL}
 fi
 
 # unpack source tarball
-${TAR} xzvf ${FILEPHPINTL}
+${TAR} xzvf ${FILE_PHP_INTL}
 
 # ----------------------------------------------------------------------
 
 # build and install
-cd ${DIRPHPINTL}
+cd ${DIR_PHP_INTL}
 
 ${PHPIZE}
 
