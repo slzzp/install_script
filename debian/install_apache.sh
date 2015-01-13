@@ -353,6 +353,12 @@ fi
 # ----------------------------------------------------------------------
 
 # SSL
+#
+# TODO: generate key and cert
+# openssl genrsa -out pop3.key 2048
+# openssl req -new -key pop3.key -out pop3.csr
+# openssl x509 -req -days 365 -sha1 -extensions v3_req -CA NCTU.crt -CAkey NCTU.key -CAserial NCTU.srl -CAcreateserial -in pop3.csr -out pop3.crt
+
 if [ -f '/service/apache2/modules/mod_ssl.so' ]; then
     TMPCOUNT=`${GREP} 'LoadModule ssl_module modules/mod_ssl.so' /service/apache2/conf/httpd.conf | ${WC} -l | ${TR} -d ' '`
     if [ "0" = "${TMPCOUNT}" ]; then
