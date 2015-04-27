@@ -1,0 +1,20 @@
+diff -dru vmmemctl-only.orig/os.c vmmemctl-only/os.c
+--- vmmemctl-only.orig/os.c	2013-10-29 20:16:12.000000000 +0100
++++ vmmemctl-only/os.c	2014-02-10 22:53:26.000000000 +0100
+@@ -264,14 +264,14 @@
+    p->size = (p->size + sizeof(unsigned long) - 1) & 
+                          ~(sizeof(unsigned long) - 1);
+ 
+-   p->bitmap = (unsigned long *)kmem_alloc(kernel_map, p->size);
++   p->bitmap = (unsigned long *)kmem_malloc(kernel_arena, p->size, M_WAITOK);
+ }
+ 
+ 
+ static void
+ os_pmap_free(os_pmap *p) // IN
+ {
+-   kmem_free(kernel_map, (vm_offset_t)p->bitmap, p->size);
++   kmem_free(kernel_arena, (vm_offset_t)p->bitmap, p->size);
+    p->size = 0;
+    p->bitmap = NULL;
+ }

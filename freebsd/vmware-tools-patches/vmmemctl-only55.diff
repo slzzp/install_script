@@ -1,0 +1,38 @@
+diff -dru vmmemctl-only.orig/os.c vmmemctl-only/os.c
+--- vmmemctl-only.orig/os.c	2013-08-17 19:49:29.000000000 +0200
++++ vmmemctl-only/os.c	2014-02-15 23:59:54.000000000 +0100
+@@ -295,7 +295,7 @@
+ Mapping
+ OS_MapPageHandle(PageHandle handle)     // IN
+ {
+-   vm_offset_t res = kmem_alloc_nofault(kernel_map, PAGE_SIZE);
++   vm_offset_t res = kmem_malloc(kernel_arena, PAGE_SIZE, M_WAITOK);
+    vm_page_t page = (vm_page_t)handle;
+ 
+    if (!res) {
+@@ -352,7 +352,7 @@
+ OS_UnmapPage(Mapping mapping)           // IN
+ {
+    pmap_qremove((vm_offset_t)mapping, 1);
+-   kmem_free(kernel_map, (vm_offset_t)mapping, PAGE_SIZE);
++   kmem_free(kernel_arena, (vm_offset_t)mapping, PAGE_SIZE);
+ }
+ 
+ 
+@@ -369,14 +369,14 @@
+    p->size = (p->size + sizeof(unsigned long) - 1) & 
+                          ~(sizeof(unsigned long) - 1);
+ 
+-   p->bitmap = (unsigned long *)kmem_alloc(kernel_map, p->size);
++   p->bitmap = (unsigned long *)kmem_malloc(kernel_arena, p->size, M_WAITOK);
+ }
+ 
+ 
+ static void
+ os_pmap_free(os_pmap *p) // IN
+ {
+-   kmem_free(kernel_map, (vm_offset_t)p->bitmap, p->size);
++   kmem_free(kernel_arena, (vm_offset_t)p->bitmap, p->size);
+    p->size = 0;
+    p->bitmap = NULL;
+ }

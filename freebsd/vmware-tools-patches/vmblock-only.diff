@@ -1,0 +1,32 @@
+diff -dru vmblock-only.orig/vfsops.c vmblock-only/vfsops.c
+--- vmblock-only.orig/vfsops.c	2013-10-29 20:16:30.000000000 +0100
++++ vmblock-only/vfsops.c	2014-02-10 23:16:40.000000000 +0100
+@@ -231,7 +231,7 @@
+     */
+    MNT_ILOCK(mp);
+    mp->mnt_flag |= lowerrootvp->v_mount->mnt_flag & MNT_LOCAL;
+-#if __FreeBSD_version >= 600000
++#if __FreeBSD_version >= 600000 && __FreeBSD_version < 1000021
+    mp->mnt_kern_flag |= lowerrootvp->v_mount->mnt_kern_flag & MNTK_MPSAFE;
+ #endif
+    MNT_IUNLOCK(mp);
+diff -dru vmblock-only.orig/vnops.c vmblock-only/vnops.c
+--- vmblock-only.orig/vnops.c	2013-10-29 20:16:30.000000000 +0100
++++ vmblock-only/vnops.c	2014-02-10 23:19:21.000000000 +0100
+@@ -1365,7 +1365,6 @@
+ */
+ {
+    struct vnode *vp = ap->a_vp;
+-   struct thread *td = ap->a_td;
+ 
+    vp->v_object = NULL;
+ 
+@@ -1373,7 +1372,7 @@
+     * If this is the last reference, then free up the vnode so as not to
+     * tie up the lower vnode.
+     */
+-   vrecycle(vp, td);
++   vrecycle(vp);
+ 
+    return 0;
+ }
