@@ -4,9 +4,10 @@ ftp://ftp.tw.freebsd.org/pub/ISO-IMAGES-amd64/
 
 --
 
-VMWare: CPU core 2, RAM 4GB, HDD 12GB (swap = RAM * 2, system = 4G+)
+VMWare: CPU core 2, RAM 4GB, HDD 16GB (swap = RAM * 2, system = 8G+)
   CDROM: [netapp_ds1] ISO-Images/FreeBSD-10.1-RELEASE-amd64-dvd1.iso
-  (installed freebsd default use 2.6GB)
+  (installed freebsd default use 2.6GB, with packages/update +1GB)
+
 --
 
 Welcome: <Install>
@@ -29,7 +30,7 @@ Partitioning: Manual
   (get da0p1)
   da0, Create
     Type: freebsd-ufs
-    Size: 4096MB
+    Size: 8GB
     Mountpoint: /
     Label:
   (get da0p3)
