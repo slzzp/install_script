@@ -28,7 +28,7 @@ fi
 
 
 # need compat6x-amd64
-if [ ! -d '/usr/local/lib/compat' -o ! -e '/usr/local/lib/compat/libc.so.6' ]; then
+if [ ! -d '/usr/local/lib/compat' -o ! -f '/usr/local/lib/compat/libc.so.6' ]; then
   echo 'y' | ${PKG} install compat6x-amd64
 fi
 
