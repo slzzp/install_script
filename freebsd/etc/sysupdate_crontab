@@ -3,4 +3,7 @@
 0	4	*	*	*	root	/usr/sbin/freebsd-update fetch
 
 # pkg update
-30	4	*	*	*	root	/usr/bin/pkg update
+20	4	*	*	*	root	/usr/bin/pkg update
+
+# port update
+40	4	*	*	*	root	/usr/sbin/portsnap fetch extract

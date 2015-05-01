@@ -64,7 +64,9 @@ Final Configuration: Exit <OK>, <Reboot>
 
 --
 
-Login as root, run 'pkg' and 'pkg update'
+Login as root, update packages/ports tree first.
+1. run 'pkg' and 'pkg update'
+2. run 'portsnap fetch' and 'portsnap extract'
 
 --
 
