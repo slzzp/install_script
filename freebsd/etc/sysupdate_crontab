@@ -1,0 +1,6 @@
+
+# freebsd-update
+0	4	*	*	*	root	/usr/sbin/freebsd-update fetch
+
+# pkg update
+30	4	*	*	*	root	/usr/bin/pkg update
