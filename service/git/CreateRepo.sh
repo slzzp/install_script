@@ -2,6 +2,7 @@
 
 # run as user 'root'
 
+CHMOD=/bin/chmod
 CHOWN=/usr/sbin/chown
 GIT=/usr/local/bin/git
 MKDIR=/bin/mkdir
@@ -35,3 +36,4 @@ cd "$1"
 ${GIT} init --bare --shared
 
 ${CHOWN} -R git:git .
+${CHMOD} 700 .
