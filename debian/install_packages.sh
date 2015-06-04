@@ -54,6 +54,12 @@ if [ ! -f '/usr/bin/s3cmd' ]; then
     /usr/bin/apt-get -y install s3cmd python-magic
 fi
 
+# or aws-cli
+if [ ! -f '/usr/bin/pip' -o ! -f '/usr/local/bin/aws' ]; then
+    /usr/bin/apt-get -y install python-pip
+    /usr/bin/pip install awscli
+fi
+
 if [ ! -f '/usr/bin/pcre-config' ]; then
     /usr/bin/apt-get -y install libpcre3 libpcre3-dev libpcre++-dev
 fi
