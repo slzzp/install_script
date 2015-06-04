@@ -1,0 +1,77 @@
+FreeBSD 10.1-RELEASE x64
+
+ftp://ftp.tw.freebsd.org/pub/ISO-IMAGES-amd64/
+
+--
+
+VMWare: CPU core 2, RAM 4GB, HDD 16GB (swap = RAM * 2, system = 8G+)
+  CDROM: [netapp_ds1] ISO-Images/FreeBSD-10.1-RELEASE-amd64-dvd1.iso
+  (installed freebsd default use 2.6GB, with packages/update +1GB)
+
+--
+
+Welcome: <Install>
+
+Keymap Selection: Continue with default keymap <Select>
+
+Set Hostname: blahblah.foo.com
+
+Distribution Select: no doc/games, check lib32 ports <OK>
+  (check src for vmware with vmware tools)
+
+Partitioning: Manual
+  da0, Create
+    if new hdd, GPT  GUID Partition Table <OK>
+  da0, Create
+    Type: freebsd-swap
+    Size: 8GB
+    Mountpoint:
+    Label:
+  (get da0p1)
+  da0, Create
+    Type: freebsd-ufs
+    Size: 8GB
+    Mountpoint: /
+    Label:
+  (get da0p3)
+  (ask and generate freebsd-boot, size 512KB, da0p2)
+  <Finish> <Commit>
+
+Archive Extraction (start installing...)
+
+Changing local password for root (input password)
+
+Network Configuration:
+  em0
+    configure IPv4 <Yes>, use DHCP <Yes> (or <No> to set ip/netmask/gateway)
+    configure IPv6 <No>
+  Search        blahblah.foo.com
+  IPv4 DNS #1   168.95.1.1
+  IPv4 DNS #2   168.95.192.1
+
+Select local or UTC (Greenwich Mean time) clock
+  Is this Machine's CMOS clock set to UTC? <No>
+
+  Time Zone Selector:  5 Asia, 42 Taiwan
+  Does the abbreviation 'CST' look reasonable? <Yes>
+
+System Configuration
+  check sshd ntpd <OK>
+
+Add User Accounts: <No>, or yes if you need
+
+Final Configuration: Exit <OK>, <Reboot>
+
+--
+
+Login as root, update packages/ports tree first.
+1. run 'pkg update'
+2. run 'portsnap fetch extract'
+
+--
+
+Update system: freebsd-update fetch install
+
+--
+
+If freebsd is guest OS in vmware host, run install_vmwaretools.sh

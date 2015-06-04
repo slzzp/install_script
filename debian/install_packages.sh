@@ -229,6 +229,27 @@ if [ ! -f "${CHECKFILE}" ]; then
     exit
 fi
 
+# install php intl module from source
+CHECKFILE='/service/php/lib/php/extensions/intl.so'
+if [ ! -f "${CHECKFILE}" ]; then
+    if [ ! -f 'install_php_intl.sh' ]; then
+        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_php_intl.sh
+
+        if [ ! -f 'install_php_intl.sh' ]; then
+            echo "Sorry, can't get script for installing php intl module now, or current/working directory is forbidden to write."
+            exit
+        fi
+    fi
+
+    /bin/sh install_php_intl.sh
+fi
+
+if [ ! -f "${CHECKFILE}" ]; then
+    echo "Sorry, error occurs during building php intl module. Please check error messages and fix them manually, then re-run install script."
+    exit
+fi
+
+
 # install php memcache module from source
 CHECKFILE='/service/php/lib/php/extensions/memcache.so'
 if [ ! -f "${CHECKFILE}" ]; then
@@ -247,20 +268,5 @@ fi
 if [ ! -f "${CHECKFILE}" ]; then
     echo "Sorry, error occurs during building php memcache module. Please check error messages and fix them manually, then re-run install script."
     exit
-fi
-
-# ----------------------------------------------------------------------
-
-if [ -f '/service/apache2/conf/httpd.conf' ]; then
-    if [ ! -f 'fix_apache_conf.sh' ]; then
-        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/fix_apache_conf.sh
-
-        if [ ! -f 'fix_apache_conf.sh' ]; then
-            echo "Sorry, can't get script for fixing apache conf now, or current/working directory is forbidden to write."
-            exit
-        fi
-    fi
-
-    /bin/sh fix_apache_conf.sh
 fi
 

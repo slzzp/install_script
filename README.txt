@@ -2,7 +2,7 @@ Here are some installing package/service scripts.
 
 DESCRIPTION
 - Debian 6/7: use apt-get
-- FreeBSD: use ports
+- FreeBSD 10.1-RELEASE: use pkg
 
 NOTICE
-- My develop platform is Debian Linux "squeeze" "wheezy" / FreeBSD, use general /bin/sh and unix tools.
+- My develop platform is Ubuntu Linux / FreeBSD, use general /bin/sh and unix tools.

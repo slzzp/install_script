@@ -1,0 +1,40 @@
+diff -dru vmware-tools-distrib.orig/bin/vmware-config-tools.pl vmware-tools-distrib/bin/vmware-config-tools.pl
+--- vmware-tools-distrib.orig/bin/vmware-config-tools.pl	2013-10-29 20:56:24.000000000 +0100
++++ vmware-tools-distrib/bin/vmware-config-tools.pl	2014-02-11 00:45:21.000000000 +0100
+@@ -14473,7 +14473,7 @@
+ 		 'you attempt to configure VMware Tools.' . "\n\n", 0);
+ 
+      print wrap ('The easiest way to install this package is by using ' .
+-		 'pkg_add utility.  Refer to the man pages on how to ' .
++		 'pkg utility.  Refer to the man pages on how to ' .
+ 		 'properly use this utility.' . "\n\n", 0);
+ 
+      error("Please re-run this program after installing the $pkg_name " .
+@@ -14489,14 +14489,14 @@
+ sub bsd_has_package {
+   my $pkg = shift;
+ 
+-  my $pkginfo_path = internal_which('pkg_info');
++  my $pkginfo_path = internal_which('pkg');
+   if ($pkginfo_path eq ''){
+-    error("This program could not find a valid path to pkg_info.  " .
+-          "Please ensure that the pkg_info binary is installed " .
++    error("This program could not find a valid path to pkg.  " .
++          "Please ensure that the pkg binary is installed " .
+           "in the system path.\n\n");
+   }
+ 
+-  my $pkg_info_output = `$pkginfo_path`;
++  my $pkg_info_output = `$pkginfo_path info`;
+   return ($pkg_info_output =~ /^$pkg-\d/m);
+ }
+ 
+@@ -14525,7 +14525,7 @@
+     }
+     print wrap ("\n" .
+                 'The easiest way to install these packages is by using ' .
+-                'pkg_add utility.  Refer to the man pages on how to ' .
++                'pkg command.  Refer to the man pages on how to ' .
+                 'properly use this utility.' . "\n\n", 0);
+   }
+ }
