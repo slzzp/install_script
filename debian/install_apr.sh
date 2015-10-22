@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://apr.apache.org/download.cgi?Preferred=http%3A%2F%2Fftp.twaren.net%2FUnix%2FWeb%2Fapache%2F
-URL_APR='http://ftp.twaren.net/Unix/Web/apache//apr/apr-1.5.1.tar.gz'
+URL_APR='http://ftp.twaren.net/Unix/Web/apache//apr/apr-1.5.2.tar.gz'
 
 BASENAME='/usr/bin/basename'
 MAKE='/usr/bin/make'
