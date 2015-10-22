@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://httpd.apache.org/download.cgi?Preferred=http%3A%2F%2Fftp.twaren.net%2FUnix%2FWeb%2Fapache%2F
-URL_APACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.10.tar.gz'
+URL_APACHE='http://ftp.twaren.net/Unix/Web/apache//httpd/httpd-2.4.17.tar.gz'
 
 AWK='/usr/bin/awk'
 BASENAME='/usr/bin/basename'
