@@ -4,7 +4,7 @@
 
 # ref: http://www.php.net/manual/en/memcache.installation.php
 #      http://pecl.php.net/package/memcache
-URL_PHP_MEMCACHE='http://pecl.php.net/get/memcache-2.2.7.tgz'
+URL_PHP_MEMCACHE='http://pecl.php.net/get/memcache-3.0.8.tgz'
 
 BASENAME='/usr/bin/basename'
 CP='/bin/cp'
