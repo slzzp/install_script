@@ -54,6 +54,10 @@ if [ ! -f '/usr/bin/bison' ]; then
     /usr/bin/apt-get -y install bison
 fi
 
+if [ ! -f '/usr/share/doc/libboost-dev/copyright' ]; then
+    /usr/bin/apt-get -y install libboost-dev
+fi
+
 if [ ! -f '/usr/share/doc/libncurses5-dev/copyright' ]; then
     /usr/bin/apt-get -y install libncurses5 libncurses5-dev
 fi
