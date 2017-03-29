@@ -5,7 +5,7 @@
 # ref: https://code.google.com/p/modwsgi/wiki/DownloadTheSoftware?tm=2
 #      https://github.com/GrahamDumpleton/mod_wsgi/releases
 # URL_MOD_WSGI='https://modwsgi.googlecode.com/files/mod_wsgi-3.4.tar.gz'
-URL_MOD_WSGI='https://github.com/GrahamDumpleton/mod_wsgi/archive/4.3.2.tar.gz'
+URL_MOD_WSGI='https://github.com/GrahamDumpleton/mod_wsgi/archive/4.5.15.tar.gz'
 
 BASENAME='/usr/bin/basename'
 CAT='/bin/cat'
@@ -25,7 +25,7 @@ WGET='/usr/bin/wget'
 # ----------------------------------------------------------------------
 
 #FILE_MOD_WSGI=`${BASENAME} ${URL_MOD_WSGI}`
-FILE_MOD_WSGI='mod_wsgi-4.3.2.tar.gz'
+FILE_MOD_WSGI='mod_wsgi-4.5.15.tar.gz'
 DIR_MOD_WSGI=`echo -n ${FILE_MOD_WSGI} | ${SED} 's/\.tar\.gz//g'`
 DIR_PWD=`${PWD}`
 
