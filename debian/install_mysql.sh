@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ref: http://dev.mysql.com/downloads/mysql/
-URLMYSQL='http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.17.tar.gz'
+URLMYSQL='http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.24.tar.gz'
 
 INSTALL_DIR='/service/mysql'
 MYSQL_DATA_DIR='/var/lib/mysql'
