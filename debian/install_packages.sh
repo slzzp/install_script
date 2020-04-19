@@ -229,26 +229,6 @@ if [ ! -f "${CHECKFILE}" ]; then
     exit
 fi
 
-# install php intl module from source
-CHECKFILE='/service/php/lib/php/extensions/intl.so'
-if [ ! -f "${CHECKFILE}" ]; then
-    if [ ! -f 'install_php_intl.sh' ]; then
-        /usr/bin/wget https://raw.githubusercontent.com/slzzp/install_script/master/debian/install_php_intl.sh
-
-        if [ ! -f 'install_php_intl.sh' ]; then
-            echo "Sorry, can't get script for installing php intl module now, or current/working directory is forbidden to write."
-            exit
-        fi
-    fi
-
-    /bin/sh install_php_intl.sh
-fi
-
-if [ ! -f "${CHECKFILE}" ]; then
-    echo "Sorry, error occurs during building php intl module. Please check error messages and fix them manually, then re-run install script."
-    exit
-fi
-
 
 # install php memcache module from source
 CHECKFILE='/service/php/lib/php/extensions/memcache.so'
